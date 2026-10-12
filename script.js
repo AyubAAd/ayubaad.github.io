@@ -180,7 +180,10 @@ function renderRepoOrbit(){
     const index = available.indexOf(card);
     const isAvailable = index !== -1;
     planet.hidden = !isAvailable;
-    if(!isAvailable)return;
+    if(!isAvailable){
+      planet.setAttribute('aria-pressed','false');
+      return;
+    }
     const offset = (index-focusedIndex+available.length)%available.length;
     const slot = slots[offset];
     planet.dataset.slot = slot;
