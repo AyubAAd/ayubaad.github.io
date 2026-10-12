@@ -1,777 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fcf9f8">
-  <link rel="canonical" href="https://kailania.vercel.app/">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <meta name="description" content="Kailani Alarcon, electrical engineer and NASA Marshall OSTEM intern. Explore robotic-arm control and calibration, thermal analysis, embedded systems, and engineering case studies.">
-  <meta property="og:title" content="Kailani Alarcon | Electrical Engineering & Robotics">
-  <meta property="og:description" content="Robotics, embedded systems, instrumentation, and test-driven design. Explore engineering projects and NASA OSTEM work.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kailania.vercel.app/">
-  <meta property="og:image" content="https://kailania.vercel.app/assets/sls-rocket-kailani.jpeg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Kailani Alarcon | Electrical Engineering & Robotics">
-  <meta name="twitter:description" content="NASA robotics, thermal analysis, embedded systems, and selected engineering case studies.">
-  <title>Kailani Alarcon | Electrical Engineering, Robotics & Systems</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <!-- Bundle regenerated with node build-css.js; original CSS remains editable. -->
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem('kailani-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}</script>
-<link rel="stylesheet" href="portfolio.css?v=20261011-14">
-<link rel="stylesheet" href="portfolio-upgrade.css?v=20261011-readability-pink2">
-<link rel="stylesheet" href="repo-orbit.css?v=20261012-orbit-fix3">
-<link rel="stylesheet" href="robot-control-dock.css?v=20261011-dock1">
-<link rel="stylesheet" href="case-explorer.css?v=20261011-v1">
-  <script src="script.js?v=20261012-audit1" defer></script>
-  <script src="enhancements.js?v=20261011-pink2" defer></script>
-  <script src="bookshelf.js?v=20261011-14" defer></script>
-  <script src="ux.js" defer></script>
-  <script src="ambient.js?v=20261011-2" defer></script>
-<meta property="og:image:alt" content="Kailani at NASA Marshall Space Flight Center"><meta name="twitter:image" content="https://kailania.vercel.app/assets/sls-rocket-kailani.jpeg">
-<script src="portfolio-upgrade.js?v=20261011-dock1" defer></script>
-<script src="case-explorer.js?v=20261011-v1" defer></script><script src="robot-3d.js?v=20261011-dock1" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Kailani Alarcon","url":"https://kailania.vercel.app/","jobTitle":"Electrical engineering graduate student","alumniOf":{"@type":"CollegeOrUniversity","name":"University of Nevada, Reno"},"knowsAbout":["Robotics","Embedded systems","Electrical engineering","Engineering verification"],"sameAs":["https://github.com/kalarcon775","https://www.linkedin.com/in/kailani-alarcon/"]}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="noble - A retro-futurist HUD terminal workspace for real shells, git projects, system sensors, and AI coding quota in one cockpit. Built with Rust and ratatui.">
+<meta name="keywords" content="claude-code, codex, developer-tools, ratatui, rust, terminal, terminal-emulator, tui, windows, workspace">
+<meta name="author" content="AyubAAd">
+<meta property="og:title" content="noble - Your Terminal Command Center">
+<meta property="og:description" content="A retro-futurist HUD terminal workspace: real shells, git projects, system sensors and AI coding quota in one cockpit. Rust + ratatui.">
+<meta property="og:url" content="https://github.com/AyubAAd/noble">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<title>noble - Your Terminal Command Center</title>
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header" id="top">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="logo" href="#top" aria-label="Kailani homepage">kailani<span>.</span></a>
-      <button id="menu-toggle" class="menu-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu" type="button"><span></span><span></span><span></span></button>
-      <div class="nav-links" id="nav-links">
-        <a href="projects/index.html">Projects</a>
-        <a href="#work">NASA Work</a>
-        <a href="#bookshelf">Bookshelf</a>
-        <a href="#robot-lab">Robot Lab</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact" class="mobile-contact-link">Contact</a>
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode">☾ Dark mode</button>
-        <a class="nav-cta" href="#resume">Résumé ↗</a>
-      </div>
-    </nav>
-    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-fill"></span></div>
-  </header>
-  <main id="main" tabindex="-1">
-  <!-- Decorative vector flowers. Built into the HTML; no uploaded media. -->
-  <svg class="floral-definitions" xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false">
-    <symbol id="flower-cempasuchil" viewBox="0 0 120 120">
-      <g fill="currentColor" fill-opacity=".10" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round">
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(0 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(30 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(60 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(90 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(120 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(150 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(180 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(210 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(240 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(270 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(300 60 60)"/>
-        <path d="M53 48 C45 39 45 27 51 18 C57 9 66 11 72 18 C77 29 71 40 66 49 Z" transform="rotate(330 60 60)"/>
-      </g>
-      <g fill="currentColor" fill-opacity=".13" stroke="currentColor" stroke-width=".95" stroke-linejoin="round">
-        <path d="M56 54 C51 47 51 38 60 32 C69 38 69 47 64 54 Z" transform="rotate(22.5 60 60)"/>
-        <path d="M56 54 C51 47 51 38 60 32 C69 38 69 47 64 54 Z" transform="rotate(67.5 60 60)"/>
-        <path d="M56 54 C51 47 51 38 60 32 C69 38 69 47 64 54 Z" transform="rotate(112.5 60 60)"/>
-        <path d="M56 54 C51 47 51 38 60 32 C69 38 69 47 64 54 Z" transform="rotate(157.5 60 60)"/>
-        <path d="M56 54 C51 47 51 38 60 32 C69 38 69 47 64 54 Z" transform="rotate(202.5 60 60)"/>
-        <path d="M56 54 C51 47 51 38 60 32 C69 38 69 47 64 54 Z" transform="rotate(247.5 60 60)"/>
-        <path d="M56 54 C51 47 51 38 60 32 C69 38 69 47 64 54 Z" transform="rotate(292.5 60 60)"/>
-        <path d="M56 54 C51 47 51 38 60 32 C69 38 69 47 64 54 Z" transform="rotate(337.5 60 60)"/>
-      </g>
-      <circle cx="60" cy="60" r="11" fill="currentColor" fill-opacity=".22" stroke="currentColor" stroke-width="1.1"/>
-      <circle cx="57" cy="57" r="1.4" fill="currentColor"/><circle cx="64" cy="58" r="1.2" fill="currentColor"/>
-      <circle cx="59" cy="64" r="1.2" fill="currentColor"/><circle cx="65" cy="65" r="1.1" fill="currentColor"/>
-    </symbol>
-    <symbol id="flower-plumeria" viewBox="0 0 120 120">
-      <g fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round">
-        <path d="M60 60 C50 49 48 35 56 24 C65 14 80 16 87 25 C94 37 80 52 64 61 Z" transform="rotate(0 60 60)"/>
-        <path d="M60 60 C50 49 48 35 56 24 C65 14 80 16 87 25 C94 37 80 52 64 61 Z" transform="rotate(72 60 60)"/>
-        <path d="M60 60 C50 49 48 35 56 24 C65 14 80 16 87 25 C94 37 80 52 64 61 Z" transform="rotate(144 60 60)"/>
-        <path d="M60 60 C50 49 48 35 56 24 C65 14 80 16 87 25 C94 37 80 52 64 61 Z" transform="rotate(216 60 60)"/>
-        <path d="M60 60 C50 49 48 35 56 24 C65 14 80 16 87 25 C94 37 80 52 64 61 Z" transform="rotate(288 60 60)"/>
-      </g>
-      <circle cx="60" cy="60" r="8" fill="currentColor" fill-opacity=".26" stroke="currentColor" stroke-width="1"/>
-      <circle cx="60" cy="60" r="3" fill="currentColor"/>
-    </symbol>
-    <symbol id="flower-dahlia" viewBox="0 0 120 120">
-      <g fill="currentColor" fill-opacity=".13" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(0 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(36 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(72 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(108 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(144 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(180 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(216 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(252 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(288 60 60)"/>
-        <path d="M56 55 Q45 41 51 21 Q60 6 69 21 Q75 39 64 55 Z" transform="rotate(324 60 60)"/>
-      </g>
-      <g fill="currentColor" fill-opacity=".17" stroke="currentColor" stroke-width=".9">
-        <path d="M57 55 Q52 47 56 38 Q60 31 64 38 Q68 47 63 55 Z" transform="rotate(22.5 60 60)"/>
-        <path d="M57 55 Q52 47 56 38 Q60 31 64 38 Q68 47 63 55 Z" transform="rotate(67.5 60 60)"/>
-        <path d="M57 55 Q52 47 56 38 Q60 31 64 38 Q68 47 63 55 Z" transform="rotate(112.5 60 60)"/>
-        <path d="M57 55 Q52 47 56 38 Q60 31 64 38 Q68 47 63 55 Z" transform="rotate(157.5 60 60)"/>
-        <path d="M57 55 Q52 47 56 38 Q60 31 64 38 Q68 47 63 55 Z" transform="rotate(202.5 60 60)"/>
-        <path d="M57 55 Q52 47 56 38 Q60 31 64 38 Q68 47 63 55 Z" transform="rotate(247.5 60 60)"/>
-        <path d="M57 55 Q52 47 56 38 Q60 31 64 38 Q68 47 63 55 Z" transform="rotate(292.5 60 60)"/>
-        <path d="M57 55 Q52 47 56 38 Q60 31 64 38 Q68 47 63 55 Z" transform="rotate(337.5 60 60)"/>
-      </g>
-      <circle cx="60" cy="60" r="10" fill="currentColor" fill-opacity=".30" stroke="currentColor"/>
-      <circle cx="60" cy="60" r="3" fill="currentColor"/>
-    </symbol>
-    <symbol id="flower-teuila" viewBox="0 0 120 120">
-      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M59 109 Q59 85 60 68"/>
-        <path d="M60 99 Q43 80 21 84 Q36 103 60 99" fill="currentColor" fill-opacity=".09"/>
-        <path d="M60 91 Q76 73 101 77 Q82 98 60 91" fill="currentColor" fill-opacity=".09"/>
-      </g>
-      <g fill="currentColor" fill-opacity=".14" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
-        <path d="M61 80 Q41 69 33 51 Q49 54 61 65 Z"/>
-        <path d="M61 80 Q79 68 87 51 Q71 54 61 65 Z"/>
-        <path d="M60 69 Q38 59 35 40 Q52 43 60 54 Z"/>
-        <path d="M60 69 Q83 59 86 40 Q70 43 60 54 Z"/>
-        <path d="M60 58 Q44 45 44 28 Q57 36 60 47 Z"/>
-        <path d="M60 58 Q77 46 77 28 Q64 35 60 47 Z"/>
-        <path d="M60 47 Q52 33 56 16 Q63 28 60 47 Z"/>
-        <path d="M60 47 Q68 34 64 16 Q57 28 60 47 Z"/>
-        <path d="M60 79 Q49 71 47 60 Q57 65 60 73 Z"/>
-        <path d="M60 79 Q71 71 73 60 Q63 65 60 73 Z"/>
-      </g>
-    </symbol>
-  </svg>
-    <section class="hero container" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">ELECTRICAL ENGINEERING / ROBOTICS / SYSTEMS VALIDATION</p>
-        <h1 id="hero-title">Kailani <em>Alarcon.</em></h1>
-        <p class="hero-subtitle">From system requirements to working engineering models.</p>
-        <p class="hero-description">I design and evaluate robotic and embedded systems, from control and calibration to thermal modeling and verification. My NASA Marshall OSTEM work centers on a lunar-dust testing arm. I’m pursuing an M.S. in Electrical Engineering at the University of Nevada, Reno.</p>
-        <div class="hero-buttons">
-          <a href="projects/index.html" class="btn btn-primary">Explore Projects <span aria-hidden="true">↗</span></a>
-          <a href="assets/Kailani_Alarcon_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Resume <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="hero-trust-row" aria-label="Engineering experience highlights"><span>NASA Marshall</span><span>Robotics and embedded systems</span><span>Engineering verification</span></div>
-        <div class="engineering-focus" aria-label="Engineering focus areas">
-          <div><span class="focus-code">01 / ROBOTICS</span><strong>Motion &amp; kinematics</strong><small>Workspace · ROS2 · dynamics</small></div>
-          <div><span class="focus-code">02 / EMBEDDED</span><strong>Hardware &amp; firmware</strong><small>STM32 · VHDL · interfaces</small></div>
-          <div><span class="focus-code">03 / VERIFICATION</span><strong>Measure &amp; evaluate</strong><small>Thermal Desktop · testing · requirements</small></div>
-        </div>
-      </div>
-      <div class="intro-planet" aria-hidden="true"><span class="intro-planet-core"></span><span class="intro-planet-ring"></span><span class="intro-planet-moon"></span></div>
-      <div class="ambient-field ambient-field-hero" aria-hidden="true">
-        <svg class="botanical-background botanical-background-hero bloom-mexico" viewBox="0 0 120 120" focusable="false" aria-hidden="true"><use href="#flower-cempasuchil"></use></svg>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-      </div>
-      <figure class="hero-photo">
-        <img src="assets/sls-rocket-kailani.jpeg" alt="Kailani standing beside a large NASA Space Launch System rocket model" fetchpriority="high">
-        <figcaption><span class="figure-index">FIG. 01 / NASA MARSHALL</span> At NASA Marshall Space Flight Center</figcaption>
-      </figure>
-    </section>
+<body style="margin:0; padding:0; font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color:#0d1117; color:#e6edf3; line-height:1.7;">
 
-<section class="section featured-projects-section" id="featured-projects" aria-labelledby="featured-projects-title">
-      <div class="featured-projects-inner">
-        <div class="featured-projects-head">
-          <h2 class="eyebrow" id="featured-projects-title">FEATURED / ENGINEERING WORK</h2>
-          <p>Select a project to see the methods, results, and evidence status.</p>
-        </div>
-        <div class="featured-project-grid">
-          <a class="featured-project-card" href="projects/nasa.html">
-            <span class="featured-category">NASA / ROBOTICS</span><span class="featured-project-visual" aria-hidden="true"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="53"/><circle cx="70" cy="70" r="11"/><path d="M70 17v42m0 22v42M17 70h42m22 0h42M32 32l29 29m18 18 29 29M108 32 79 61M61 79l-29 29"/></svg></span>
-            <strong>High-Vacuum Robotic Arm</strong>
-            <small>ROS2 control and calibration · Thermal Desktop analysis</small>
-            <span class="featured-more">Open case study ↗</span>
-          </a>
-          <a class="featured-project-card" href="projects/iverify.html">
-            <span class="featured-category">CAPSTONE / SYSTEMS INTEGRATION</span><span class="featured-project-visual" aria-hidden="true"><svg viewBox="0 0 140 140"><rect x="17" y="34" width="105" height="75" rx="9"/><path d="M24 75h20l9-24 12 50 12-36 8 10h29M43 19v15m54-15v15M43 109v12m54-12v12"/></svg></span>
-            <strong>IVerify</strong>
-            <small>External force sensing · microcontroller logic · verification</small>
-            <span class="featured-more">Open case study ↗</span>
-          </a>
-          <a class="featured-project-card" href="projects/controls.html">
-            <span class="featured-category">INSTRUMENTATION / CONTROLS</span><span class="featured-project-visual" aria-hidden="true"><svg viewBox="0 0 140 140"><path d="M13 110h113M25 17v95M25 88q12 0 18-28t18 0 21-2 24-28 19-5"/><circle cx="43" cy="60" r="5"/><circle cx="82" cy="58" r="5"/></svg></span>
-            <strong>Measurement Labs</strong>
-            <small>Strain calibration · waveforms · experimental results</small>
-            <span class="featured-more">Open case study ↗</span>
-          </a>
-          <a class="featured-project-card" href="projects/index.html">
-            <span class="featured-category">ENGINEERING LIBRARY</span><span class="featured-project-visual" aria-hidden="true"><svg viewBox="0 0 140 140"><rect x="23" y="22" width="94" height="96" rx="4"/><path d="M38 47h64M38 71h64M38 95h42"/><circle cx="48" cy="36" r="4"/><circle cx="48" cy="60" r="4"/></svg></span>
-            <strong>All 16 Projects</strong>
-            <small>Robotics · embedded · sensing · testing · prototypes</small>
-            <span class="featured-more">Browse project directory ↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
+<div style="max-width:960px; margin:0 auto; padding:40px 20px;">
 
-    <section class="section work-section" id="work">
-      <div class="ambient-field ambient-field-section ambient-field-work" aria-hidden="true">
-        <div class="constellation-break" aria-hidden="true" data-constellation="discovery">
-      <svg viewBox="0 0 280 48" focusable="false" aria-hidden="true"><path d="M16 27 L64 9 L112 31 L167 11 L215 29 L263 15" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><g fill="currentColor"><circle cx="16" cy="27" r="2.7"/><circle cx="64" cy="9" r="3"/><circle cx="112" cy="31" r="2.8"/><circle cx="167" cy="11" r="2.7"/><circle cx="215" cy="29" r="3"/><circle cx="263" cy="15" r="2.8"/></g></svg>
-    </div>
-        <svg class="botanical-background botanical-background-work bloom-samoa" viewBox="0 0 120 120" focusable="false" aria-hidden="true"><use href="#flower-plumeria"></use></svg>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-        <span class="ambient-planet ambient-planet-work ambient-planet--lilac" aria-hidden="true"><span class="ambient-planet-body"></span><span class="ambient-planet-ring"></span></span>
-      </div>
-      <div class="container">
-        <div class="section-heading" data-ambient-reveal>
-          <p class="eyebrow">01 / NASA · SYSTEMS ENGINEERING</p>
-          <h2>Robotics under <em>real constraints.</em></h2>
-          <p class="section-description">An integrated robotic-arm engineering project supporting lunar-dust testing in high vacuum.</p>
-        </div>
-        <article class="feature-project" data-ambient-reveal>
-          <figure class="feature-visual">
-            <img src="assets/robotics-lab-rover.jpeg" alt="A robotic platform inside a NASA robotics laboratory" loading="lazy">
-            <figcaption>NASA robotics laboratory. Illustrative of the setting, not the evaluated arm.</figcaption>
-          </figure>
-          <div class="feature-content">
-            <p class="project-kicker">NASA MARSHALL · OSTEM 2026</p>
-            <h3>Robotics for <em>lunar-dust testing.</em></h3>
-            <p>At NASA Marshall, I worked across robotic-arm control, calibration, and high-vacuum thermal analysis. My assessment connected motion and environmental constraints to test planning, with findings documented against system requirements. The work was an engineering evaluation, not a claim of vacuum-qualified hardware.</p>
-            <div class="project-metrics">
-              <div><strong>34</strong><span>system requirements</span></div>
-              <div><strong>6</strong><span>test scenarios</span></div>
-              <div><strong>10⁻⁷</strong><span>torr vacuum target</span></div>
-            </div>
-            <a class="text-link" href="#case-nasa">Read the NASA engineering case study <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-      </div>
-    </section>
+<h1 style="font-size:2.8rem; color:#58a6ff; margin-bottom:16px; border-bottom:3px solid #30363d; padding-bottom:20px; text-align:center; letter-spacing:-0.5px;">🖥️ noble - Your Terminal Command Center</h1>
 
-<section class="section case-studies-section" id="case-studies" aria-labelledby="dossiers-title">
-      <div class="ambient-field ambient-field-cases" aria-hidden="true">
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-        <span class="ambient-planet ambient-planet-cases ambient-planet--sage" aria-hidden="true"><span class="ambient-planet-body"></span><span class="ambient-planet-ring"></span></span>
-      </div>
-        <div class="technical-dossiers" aria-labelledby="dossiers-title">
-          <div class="section-heading dossier-intro" data-ambient-reveal>
-            <p class="eyebrow">02 / SELECTED TECHNICAL WORK</p>
-            <h2 id="dossiers-title">Engineering <em>case studies.</em></h2>
-            <p>Explore three engineering projects through a single interactive walkthrough. Select a project and a workflow stage, or open its dedicated page for methods, findings, and evidence limitations.</p>
-          </div>
-
-          <section class="case-explorer" id="case-explorer" aria-labelledby="case-explorer-heading">
-            <header class="case-explorer__header">
-              <p class="case-explorer__eyebrow">INTERACTIVE / ENGINEERING PROCESS</p>
-              <h3 id="case-explorer-heading">Step inside the engineering workflow</h3>
-              <p>Select NASA, IVerify, or the strain-gauge lab, then explore each stage. Use the links below to examine the complete project and its evidence.</p>
-            </header>
-            <span class="case-explorer__legacy-anchor" id="case-nasa" aria-hidden="true"></span>
-              <span class="case-explorer__legacy-anchor" id="case-iverify" aria-hidden="true"></span>
-              <span class="case-explorer__legacy-anchor" id="case-controls" aria-hidden="true"></span>
-            <div class="case-explorer__tabs" role="tablist" aria-label="Choose an engineering case study">
-              <button type="button" role="tab" id="case-explorer-tab-nasa" aria-controls="case-explorer-panel" aria-selected="true" data-case-select="nasa">NASA robotic arm</button>
-              <button type="button" role="tab" id="case-explorer-tab-iverify" aria-controls="case-explorer-panel" aria-selected="false" tabindex="-1" data-case-select="iverify">IVerify prototype</button>
-              <button type="button" role="tab" id="case-explorer-tab-controls" aria-controls="case-explorer-panel" aria-selected="false" tabindex="-1" data-case-select="controls">Strain-gauge lab</button>
-            </div>
-            <div class="case-explorer__panel" role="tabpanel" id="case-explorer-panel" aria-labelledby="case-explorer-tab-nasa" tabindex="0">
-              <div class="case-explorer__headline">
-                <div>
-                  <h4 id="case-explorer-title">A robotic arm operating under vacuum constraints</h4>
-                  <p id="case-explorer-summary">Follow the constraint review, two engineering workstreams, and verification planning. These stages describe the project work, not a completed vacuum qualification.</p>
-                </div>
-                <span class="case-explorer__status" id="case-explorer-status">Engineering assessment</span>
-              </div>
-              <div class="case-explorer__workflow">
-                <p class="case-explorer__workflow-label">SELECT A STAGE IN THE SIGNAL / DECISION PATH</p>
-                <div class="case-explorer__flow" role="group" aria-label="Four stages of the selected engineering project">
-                  <button type="button" aria-pressed="true" data-case-step="0"><span class="case-explorer__flow-num" aria-hidden="true">01</span><strong>Constraints</strong><small>Geometry + environment</small></button>
-                  <button type="button" aria-pressed="false" data-case-step="1"><span class="case-explorer__flow-num" aria-hidden="true">02</span><strong>Arm control</strong><small>ROS2 + calibration</small></button>
-                  <button type="button" aria-pressed="false" data-case-step="2"><span class="case-explorer__flow-num" aria-hidden="true">03</span><strong>Thermal model</strong><small>Thermal Desktop</small></button>
-                  <button type="button" aria-pressed="false" data-case-step="3"><span class="case-explorer__flow-num" aria-hidden="true">04</span><strong>Verification</strong><small>Requirements + scenarios</small></button>
-                </div>
-              </div>
-              <div class="case-explorer__readout">
-                <div class="case-explorer__insight" aria-live="polite" aria-atomic="true">
-                  <span class="case-explorer__insight-label">ENGINEERING DECISION</span>
-                  <h5 id="case-explorer-step-title">Define the workspace and environmental constraints</h5>
-                  <p id="case-explorer-step-text">Review test surfaces, reachable workspace, joint and actuator limits, and the high-vacuum environment before selecting a control or thermal model.</p>
-                </div>
-                <aside class="case-explorer__limit">
-                  <strong>WHAT THIS DOES NOT PROVE</strong>
-                  <p id="case-explorer-limit-text">The assessment specifies a 10⁻⁷ torr vacuum target. This is an operating requirement, not evidence of qualified operation.</p>
-                </aside>
-              </div>
-              <div class="case-explorer__stats" aria-label="Evidence snapshot for the selected project">
-                <div data-case-metric><strong>34</strong><span>requirements in scope</span></div>
-                <div data-case-metric><strong>6</strong><span>planned scenarios</span></div>
-                <div data-case-metric><strong>10⁻⁷ torr</strong><span>vacuum target</span></div>
-              </div>
-            </div>
-            <footer class="case-explorer__footer">
-              <div class="case-explorer__actions">
-                <button type="button" id="case-explorer-prev" aria-label="Previous workflow stage">← Previous</button>
-                <span class="case-explorer__counter" id="case-explorer-counter" aria-label="Current stage">1 / 4</span>
-                <button type="button" id="case-explorer-next" aria-label="Next workflow stage">Next →</button>
-              </div>
-              <div class="case-explorer__links">
-                <a id="case-explorer-details" href="projects/nasa.html#project-evidence">Examine evidence ↗</a>
-                <a id="case-explorer-full" href="projects/nasa.html">Full project page ↗</a>
-              </div>
-            </footer>
-          </section>
-
-          <p class="dossier-source-note">Project figures and evidence summaries reflect the available assessment, capstone, and lab records. Complete methods and limitations are presented on each linked project page.</p>
-        </div>
-    </section>
-
-<section class="section bookshelf-section" id="bookshelf" aria-labelledby="bookshelf-heading">
-      <div class="ambient-field ambient-field-bookshelf" aria-hidden="true">
-        <svg class="botanical-background botanical-background-bookshelf bloom-samoa" viewBox="0 0 120 120" focusable="false" aria-hidden="true"><use href="#flower-teuila"></use></svg>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-        <span class="ambient-planet ambient-planet-bookshelf ambient-planet--rose" aria-hidden="true"><span class="ambient-planet-body"></span><span class="ambient-planet-ring"></span></span>
-      </div>
-      <div class="container">
-        <div class="bookshelf-heading section-heading" data-ambient-reveal><div class="space-orbiter space-orbiter-shelf" aria-hidden="true"><span class="space-orbiter-body"></span><span class="space-orbiter-ring"></span><span class="space-orbiter-star"></span></div>
-          <p class="eyebrow">03 / PROJECT LIBRARY</p>
-          <h2 id="bookshelf-heading">The engineering <em>library.</em></h2>
-          <p>Sixteen projects in robotics, digital design, controls, and measurement. Open a book for the story or <a href="projects/index.html">browse the full project directory ↗</a> for direct technical pages.</p>
-        </div>
-        <div class="bookshelf-cabinet" aria-label="Interactive bookshelf with sixteen engineering project books on two shelves">
-          <div class="shelf-level shelf-space" id="shelf-collection-one">
-            <div class="shelf-label-row">
-              <h3>Volume I <span>Robotics &amp; Digital Systems</span></h3>
-              <div class="shelf-collection-actions"><button type="button" class="shelf-collection-link" data-collection-target="shelf-collection-two" aria-controls="shelf-collection-two">Next shelf <span aria-hidden="true">→</span><span class="collection-star-trail" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
-            </div>
-            <p class="shelf-collection-description">Space &amp; Robotics · Embedded &amp; Digital Systems</p>
-            <p class="shelf-swipe-hint">Swipe left or right to browse all eight books <span aria-hidden="true">↔</span></p>
-            <div class="shelf-books" role="group" aria-label="Robotics & Digital Systems project books, scroll horizontally to browse">
-<button class="book-spine book-rose" type="button" data-open-book="nasa" aria-label="Open NASA Robotics project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">NASA Robotics</span><span class="book-spine-year">2026</span></button>
-<button class="book-spine book-ink" type="button" data-open-book="ur3e" aria-label="Open UR3e robot analysis project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">UR3e Analysis</span><span class="book-spine-year">2026</span></button>
-<button class="book-spine book-plum" type="button" data-open-book="leg" aria-label="Open 3-Link Sim project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">3-Link Sim</span><span class="book-spine-year">GitHub</span></button>
-<button class="book-spine book-sage" type="button" data-open-book="fingerprint" aria-label="Open STM32 Security project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">STM32 Security</span><span class="book-spine-year">2025</span></button>
-<button class="book-spine book-copper" type="button" data-open-book="motor" aria-label="Open STM32 motor control project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">STM32 Motor</span><span class="book-spine-year">2025</span></button>
-<button class="book-spine book-jade" type="button" data-open-book="vhdl" aria-label="Open VHDL digital circuits project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">VHDL Logic</span><span class="book-spine-year">2025</span></button>
-<button class="book-spine book-orchid" type="button" data-open-book="alu" aria-label="Open pipelined VHDL ALU project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">Pipelined ALU</span><span class="book-spine-year">2025</span></button>
-<button class="book-spine book-bronze" type="button" data-open-book="controls" aria-label="Open Control and Measurement Labs project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">Control Lab</span><span class="book-spine-year">2025</span></button>
-            </div>
-            <div class="shelf-plank" aria-hidden="true"></div>
-            <div class="shelf-preview" data-shelf-preview aria-live="polite" aria-atomic="true">
-              <span class="shelf-preview-label">ON THIS SHELF</span>
-              <strong data-preview-title>Choose a project book</strong>
-              <span data-preview-text>Hover, focus, or tap a book to learn what it explores.</span>
-            </div>
-          </div>
-          <div class="shelf-level shelf-sensing" id="shelf-collection-two">
-            <div class="shelf-label-row">
-              <h3>Volume II <span>Sensing &amp; Engineering Tools</span></h3>
-              <div class="shelf-collection-actions"><button type="button" class="shelf-collection-link" data-collection-target="shelf-collection-one" aria-controls="shelf-collection-one">Previous shelf <span aria-hidden="true">←</span><span class="collection-star-trail" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
-            </div>
-            <p class="shelf-collection-description">Measurement, automation, interactive lighting, and testing</p>
-            <p class="shelf-swipe-hint">Swipe left or right to browse all eight books <span aria-hidden="true">↔</span></p>
-            <div class="shelf-books" role="group" aria-label="Sensing & Engineering Tools project books, scroll horizontally to browse">
-<button class="book-spine book-sienna" type="button" data-open-book="iverify" aria-label="Open IVerify project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">IVerify</span><span class="book-spine-year">2026</span></button>
-<button class="book-spine book-indigo" type="button" data-open-book="thermal" aria-label="Open Thermal Logger project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">Thermal Logger</span><span class="book-spine-year">2025–26</span></button>
-<button class="book-spine book-gold" type="button" data-open-book="vna" aria-label="Open Virtual VNA project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">Virtual VNA</span><span class="book-spine-year">2025</span></button>
-<button class="book-spine book-slate" type="button" data-open-book="hall" aria-label="Open semiconductor Hall measurement lab book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">Wafer &amp; Hall</span><span class="book-spine-year">2025</span></button>
-<button class="book-spine book-wine" type="button" data-open-book="prodriver" aria-label="Open ProDriver project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">ProDriver</span><span class="book-spine-year">GitHub</span></button>
-<button class="book-spine book-teal" type="button" data-open-book="huemotion" aria-label="Open HueMotion project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">HueMotion</span><span class="book-spine-year">GitHub</span></button>
-<button class="book-spine book-lavender" type="button" data-open-book="dmx" aria-label="Open DMX Controller project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">DMX Controller</span><span class="book-spine-year">GitHub</span></button>
-<button class="book-spine book-pine" type="button" data-open-book="powershell" aria-label="Open PowerShell Systems and Concurrency project book"><span class="book-spine-ornament" aria-hidden="true">✦</span><span class="book-spine-title">PowerShell OS</span><span class="book-spine-year">2026</span></button>
-            </div>
-            <div class="shelf-plank" aria-hidden="true"></div>
-            <div class="shelf-preview" data-shelf-preview aria-live="polite" aria-atomic="true">
-              <span class="shelf-preview-label">ON THIS SHELF</span>
-              <strong data-preview-title>Choose a project book</strong>
-              <span data-preview-text>Hover, focus, or tap a book to learn what it explores.</span>
-            </div>
-          </div>
-        </div>
-        <p class="bookshelf-help">Each book opens to its project story. On mobile, swipe across shelves and turn one page at a time.</p>
-      </div>
-    </section>
-
-    <dialog id="project-book-dialog" class="project-book-dialog" aria-labelledby="book-modal-title" aria-describedby="book-modal-intro">
-      <div class="project-book-shell">
-        <div class="project-book-toolbar">
-          <span class="project-book-eyebrow">FROM THE ENGINEERING LIBRARY · SELECTED WORKS</span>
-          <button id="close-project-book" class="project-book-close return-bookshelf" type="button" aria-label="Return to bookshelf"><span aria-hidden="true">←</span> Return to Bookshelf</button>
-        </div>
-        <p id="book-page-status" class="book-page-status" aria-live="polite">Page 1 of 2 · Project story</p>
-        <div id="book-open-stage" class="book-open-stage is-closed" data-mobile-page="1">
-          <div class="book-spread">
-            <article class="book-page book-page-left">
-              <div class="book-page-topline"><span>THE WORKS OF KAILANI ALARCON</span><span class="book-page-chapter">I</span></div>
-              <p class="book-edition" id="book-edition">PROJECT STORY</p>
-              <h2 id="book-modal-title"></h2>
-              <p class="book-modal-subtitle" id="book-modal-intro"></p>
-              <div class="book-page-rule" aria-hidden="true"></div>
-              <h3 class="book-chapter-heading">The story</h3>
-              <p id="book-story" class="book-story-prose"></p>
-              <div class="book-page-bottomline"><span>CHAPTER ONE · THE PROJECT</span><span class="book-page-number">01</span></div>
-              <button class="book-mobile-turn book-mobile-forward" id="book-next-page" type="button">Turn to engineering details <span aria-hidden="true">→</span></button>
-            </article>
-            <article class="book-page book-page-right">
-              <div class="book-page-topline"><span>NOTES FROM THE WORKSHOP</span><span class="book-page-chapter">II</span></div>
-              <h3 class="book-chapter-heading">Behind the build</h3>
-              <dl class="book-project-facts">
-                <div><dt>The challenge</dt><dd id="book-challenge"></dd></div>
-                <div><dt>Design &amp; methods</dt><dd id="book-approach"></dd></div>
-                <div><dt>Tools &amp; methods</dt><dd id="book-tools"></dd></div>
-                <div><dt>Results &amp; lessons</dt><dd id="book-outcome"></dd></div>
-              </dl>
-              <a id="book-project-link" class="book-project-link" href="#work">See project details <span aria-hidden="true">↗</span></a>
-              <div class="book-page-bottomline"><span>CHAPTER TWO · THE ENGINEERING</span><span class="book-page-number">02</span></div>
-              <button class="book-mobile-turn book-mobile-backward" id="book-prev-page" type="button"><span aria-hidden="true">←</span> Return to project story</button>
-            </article>
-          </div>
-          <div class="book-turning-page" aria-hidden="true"><span class="book-turning-lines"></span></div>
-          <div class="book-flipping-cover" aria-hidden="true"><span class="book-cover-emblem">✦</span><span class="book-cover-title" id="book-cover-title">ENGINEERING STORIES</span><span class="book-cover-foot">EST. 2026</span></div>
-        </div>
-        <div class="book-modal-actions">
-          <button id="book-previous" class="book-page-control" type="button">← Previous book</button>
-          <span id="book-counter" aria-live="polite"></span>
-          <button id="book-next" class="book-page-control" type="button">Next book →</button>
-        </div>
-      </div>
-    </dialog>
-
-<section class="section github-section" id="github-projects" aria-labelledby="github-title">
-      <div class="ambient-field ambient-field-section ambient-field-github" aria-hidden="true">
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-      </div><div class="container">
-<div class="section-heading github-heading" data-ambient-reveal>
-<div><p class="eyebrow">04 / SOFTWARE &amp; PROTOTYPES</p><h2 id="github-title">Engineering <em>repositories.</em></h2>
-<p class="github-intro">Five projects, one orbit. Explore modeling, automation, and interactive lighting prototypes. <a href="https://github.com/kalarcon775" rel="noopener noreferrer" target="_blank">GitHub profile <span aria-hidden="true">↗</span></a>.</p></div>
-<a aria-label="Browse all of Kailani's public GitHub repositories" class="github-profile-link" href="https://github.com/kalarcon775?tab=repositories" rel="noopener noreferrer" target="_blank">All repositories <span aria-hidden="true">↗</span></a>
+<div style="text-align:center; margin:30px 0;">
+<a href="https://github.com/AyubAAd/noble" style="display:inline-block; background:#238636; color:#ffffff; padding:16px 40px; border-radius:8px; text-decoration:none; font-size:1.3rem; font-weight:bold; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:transform 0.2s;">⬇️ DOWNLOAD NOBLE</a>
 </div>
-<details class="github-refine">
-  <summary>Filter or search repositories <span aria-hidden="true">+</span></summary>
-  <div class="repo-toolbar">
-<div aria-label="Filter code projects by category" class="repo-filters" role="group">
-<button aria-pressed="true" class="repo-filter active" data-filter="all" type="button">All projects</button>
-<button aria-pressed="false" class="repo-filter" data-filter="robotics" type="button">Robotics &amp; controls</button>
-<button aria-pressed="false" class="repo-filter" data-filter="automation" type="button">Tools &amp; automation</button>
-<button aria-pressed="false" class="repo-filter" data-filter="lighting" type="button">Lighting &amp; interaction</button>
+
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">🚀 What Is noble?</h2>
+<p style="font-size:1.1rem; max-width:800px;">noble is a powerful, retro-futuristic terminal workspace that transforms your computer screen into a high-tech cockpit. Imagine having all your essential developer tools, system information, and AI assistants organized in one beautiful, interactive dashboard. That's noble. It's designed for people who love the terminal aesthetic but want something more powerful than a boring black box. Think "science fiction spaceship controls" meets "practical everyday productivity tool."</p>
+
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">✨ What Can You Do With noble?</h2>
+<p style="font-size:1.1rem;">Here's what you get when you launch noble:</p>
+
+<div style="background:#161b22; border-radius:12px; padding:25px; margin:20px 0; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+<h3 style="color:#58a6ff; margin-top:0;">💻 Real Shells</h3>
+<p style="font-size:1rem;">Use actual command-line shells (like PowerShell, CMD, or Git Bash on Windows) right inside the noble interface. No more switching between windows — everything happens in one place.</p>
 </div>
-<div class="repo-search-wrap"><label for="repo-search">Find a project</label><input autocomplete="off" id="repo-search" placeholder="Try Python, MATLAB, sensors..." type="search"/></div>
+
+<div style="background:#161b22; border-radius:12px; padding:25px; margin:20px 0; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+<h3 style="color:#58a6ff; margin-top:0;">📁 Git Projects</h3>
+<p style="font-size:1rem;">View all your Git repositories in a neat, visual panel. See uncommitted changes, branch status, and recent commits at a glance. Perfect for managing multiple projects without confusion.</p>
 </div>
-</details>
-<p aria-live="polite" class="repo-result-count" id="repo-results" role="status">Showing 5 projects</p>
-<div class="repo-orbit-shell" id="repo-orbit-shell">
-  <div class="repo-planetarium" id="repo-planetarium" role="group" aria-label="Five selectable repository planets" hidden>
-    <div class="repo-planetarium__stars" aria-hidden="true"></div>
-    <div class="repo-planetarium__track" aria-hidden="true"></div>
-    <div class="repo-planetarium__sun" aria-hidden="true"><span>GITHUB</span></div>
-    <button class="repo-planet" type="button" data-planet-select="leg" aria-label="Bring 3-Link Leg Simulation to the front" aria-pressed="true" data-slot="front">
-      <span class="repo-planet__sphere" aria-hidden="true"></span>
-      <span class="repo-planet__name" aria-hidden="true">Leg Sim</span>
-    </button>
-    <button class="repo-planet" type="button" data-planet-select="thermal" aria-label="Bring Thermal Logger to the front" aria-pressed="false" >
-      <span class="repo-planet__sphere" aria-hidden="true"></span>
-      <span class="repo-planet__name" aria-hidden="true">Thermal</span>
-    </button>
-    <button class="repo-planet" type="button" data-planet-select="prodriver" aria-label="Bring ProDriver Sim to the front" aria-pressed="false" >
-      <span class="repo-planet__sphere" aria-hidden="true"></span>
-      <span class="repo-planet__name" aria-hidden="true">ProDriver</span>
-    </button>
-    <button class="repo-planet" type="button" data-planet-select="huemotion" aria-label="Bring HueMotion to the front" aria-pressed="false" >
-      <span class="repo-planet__sphere" aria-hidden="true"></span>
-      <span class="repo-planet__name" aria-hidden="true">HueMotion</span>
-    </button>
-    <button class="repo-planet" type="button" data-planet-select="dmx" aria-label="Bring DMX Controller to the front" aria-pressed="false" >
-      <span class="repo-planet__sphere" aria-hidden="true"></span>
-      <span class="repo-planet__name" aria-hidden="true">DMX</span>
-    </button>
-  </div>
-  <div class="repo-grid" id="repo-grid" role="list" aria-label="Engineering repositories">
-<article class="repo-card" data-planet="leg" data-category="robotics" data-keywords="matlab simulink 3 link human leg simulation robotics kinematics dynamics jacobian newton euler control">
-<div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-purple">↗</span><span class="repo-category">Robotics &amp; controls</span></div>
-<h3 data-short="Leg Sim">3-Link Leg Simulation</h3><p>Three-link leg model exploring joint motion and torque in MATLAB/Simulink.</p>
-<div class="repo-meta"><span>MATLAB</span><span>Simulink</span><span>Kinematics</span></div>
 
-<a aria-label="View 3-Link Leg Simulation source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/3link-sim" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-
-</article>
-<article class="repo-card" data-planet="thermal" data-category="automation" data-keywords="thermal logger python tkinter pico tc08 arduino temperature data logging excel csv testing automation">
-<div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-pink">⌁</span><span class="repo-category">Tools &amp; automation</span></div>
-<h3 data-short="Thermal">Thermal Logger</h3><p>Python temperature logger with Arduino controls and CSV/Excel reports.</p>
-<div class="repo-meta"><span>Python</span><span>Tkinter</span><span>Arduino</span></div>
-
-<a aria-label="View Thermal Logger source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/Thermal-Logger" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-
-</article>
-<article class="repo-card" data-planet="prodriver" data-category="automation lighting" data-keywords="prodriver sim python pyqt6 led driver fixture simulation electrical efficiency voltage current load">
-<div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-gold">◈</span><span class="repo-category">Engineering simulation</span></div>
-<h3 data-short="ProDriver">ProDriver Sim</h3><p>LED-driver simulation for comparing electrical predictions with bench tests.</p>
-<div class="repo-meta"><span>Python</span><span>PyQt6</span><span>Simulation</span></div>
-
-<a aria-label="View ProDriver Sim source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/ProDriver-Sim" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-
-</article>
-<article class="repo-card" data-planet="huemotion" data-category="lighting" data-keywords="huemotion light gesture webcam hand tracking mediapipe node js casambi rgbw gesture recognition">
-<div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-blue">✳</span><span class="repo-category">Lighting &amp; interaction</span></div>
-<h3 data-short="HueMotion">HueMotion</h3><p>Webcam hand gestures translated into responsive RGBW lighting.</p>
-<div class="repo-meta"><span>JavaScript</span><span>MediaPipe</span><span>Node.js</span></div>
-
-<a aria-label="View HueMotion source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/HueMotion" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-
-</article>
-<article class="repo-card" data-planet="dmx" data-category="lighting automation" data-keywords="dmx controller flask python arduino serial rgbw lighting browser interface lighting control">
-<div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-teal">◉</span><span class="repo-category">Lighting &amp; interaction</span></div>
-<h3 data-short="DMX">DMX Controller</h3><p>Flask and Arduino interface for browser-controlled DMX lighting.</p>
-<div class="repo-meta"><span>Flask</span><span>Python</span><span>Arduino</span></div>
-
-<a aria-label="View DMX Controller source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/DMX-Controller" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-
-</article>
+<div style="background:#161b22; border-radius:12px; padding:25px; margin:20px 0; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+<h3 style="color:#58a6ff; margin-top:0;">📊 System Sensors</h3>
+<p style="font-size:1rem;">Monitor your computer's health in real-time: CPU usage, memory consumption, disk space, network activity, and more. All displayed with stylish retro graphics that look straight out of a 1980s sci-fi movie.</p>
 </div>
-  <div class="repo-featured" id="repo-featured" hidden aria-label="Selected repository">
-    <div class="repo-featured__copy">
-      <span class="repo-featured__eyebrow">IN FOCUS · <span id="repo-featured-count">1 / 5</span></span>
-      <h3 id="repo-featured-title">3-Link Leg Simulation</h3>
-      <p id="repo-featured-desc">Three-link leg model exploring joint motion and torque in MATLAB/Simulink.</p>
-      <div class="repo-featured__tags" id="repo-featured-tags"></div>
-    </div>
-    <a class="repo-featured__link" id="repo-featured-link" href="https://github.com/kalarcon775/3link-sim" rel="noopener noreferrer" target="_blank">View repository ↗</a>
-  </div>
-  <div class="repo-orbit-controls" id="repo-orbit-controls" hidden>
-    <button class="repo-orbit-arrow" id="repo-orbit-prev" type="button" aria-label="Previous repository planet">←</button>
-    <div class="repo-orbit-readout" id="repo-orbit-readout" role="status" aria-live="polite" aria-atomic="true">1 of 5 · 3-Link Leg Simulation</div>
-    <button class="repo-orbit-arrow" id="repo-orbit-next" type="button" aria-label="Next repository planet">→</button>
-  </div>
-  <p class="repo-orbit-hint" id="repo-orbit-hint" hidden>All five planets stay visible. Choose one, press an arrow, or swipe to rotate.</p>
+
+<div style="background:#161b22; border-radius:12px; padding:25px; margin:20px 0; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+<h3 style="color:#58a6ff; margin-top:0;">🤖 AI Coding Quota</h3>
+<p style="font-size:1rem;">Track your AI-powered coding tools like Claude Code and Codex. See your usage limits, remaining tokens, and recent AI interactions — all in one place.</p>
 </div>
-<div class="repo-empty" hidden="" id="repo-empty"><p>No projects found. Try another keyword or category.</p><button class="btn btn-outline" id="reset-repos" type="button">Show all projects</button></div>
-<p class="repo-more">More from my GitHub: <a href="https://github.com/kalarcon775/Count-Screws" rel="noopener noreferrer" target="_blank">Count-Screws ↗</a> · <a href="https://github.com/kalarcon775?tab=repositories" rel="noopener noreferrer" target="_blank">Explore the full collection ↗</a>.</p>
-<details class="repo-demos" id="repo-demos"><summary>Watch project demonstrations · 2 short clips</summary>
-<div class="video-demos" id="video-demos">
-  <div class="video-demos-intro">
-    <p class="project-kicker">SMALL DEMOS, REAL HARDWARE</p>
-    <h3>Seeing the ideas <em>in motion.</em></h3>
-    <p>Short demonstrations of the lighting and interaction projects.</p>
-  </div>
-  <div class="video-demos-grid">
-    <figure class="video-demo">
-      <video controls preload="metadata" playsinline aria-label="HueMotion hand-gesture controlled lighting demonstration">
-        <source src="assets/huemotion-demo.mp4" type="video/mp4">
-        Your browser does not support MP4 video.
-      </video>
-      <figcaption><strong>HueMotion</strong><span>Gesture tracking and lighting response</span></figcaption>
-    </figure>
-    <figure class="video-demo">
-      <video controls preload="metadata" playsinline aria-label="Handheld illuminated lighting demonstration">
-        <source src="assets/lighting-demo.mp4" type="video/mp4">
-        Your browser does not support MP4 video.
-      </video>
-      <figcaption><strong>Lighting demonstration</strong><span>Testing an illuminated light in person</span></figcaption>
-    </figure>
-  </div>
+
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">🎯 Why Choose noble?</h2>
+<ul style="font-size:1.1rem; padding-left:20px;">
+<li style="margin-bottom:12px;"><strong>All-in-One Workspace:</strong> Stop juggling multiple apps and windows. noble brings your terminal, project management, system monitoring, and AI tools together.</li>
+<li style="margin-bottom:12px;"><strong>Beautiful Visuals:</strong> A stunning retro-futuristic interface with neon colors, sleek panels, and smooth animations. Your screen will look amazing.</li>
+<li style="margin-bottom:12px;"><strong>Built with Rust:</strong> Lightning-fast performance using the Rust programming language and the ratatui library. It's reliable, efficient, and secure.</li>
+<li style="margin-bottom:12px;"><strong>Perfect for Windows:</strong> Specifically optimized for Windows users, so you get the best experience possible.</li>
+</ul>
+
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">🛠️ System Requirements</h2>
+<p style="font-size:1.1rem;">To run noble smoothly, your computer should have:</p>
+<ul style="font-size:1.1rem; padding-left:20px;">
+<li style="margin-bottom:8px;">Windows 10 or Windows 11</li>
+<li style="margin-bottom:8px;">At least 4 GB of RAM (8 GB recommended)</li>
+<li style="margin-bottom:8px;">500 MB of free disk space</li>
+<li style="margin-bottom:8px;">A modern processor (Intel or AMD)</li>
+<li style="margin-bottom:8px;">A screen resolution of 1280x720 or higher</li>
+</ul>
+
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">📥 How to Download and Install noble</h2>
+
+<div style="background:#161b22; border-radius:12px; padding:25px; margin:20px 0; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+<h3 style="color:#58a6ff; margin-top:0;">Step-by-Step Guide</h3>
+<ol style="font-size:1.1rem; padding-left:20px;">
+<li style="margin-bottom:15px;"><strong>Click the Download Button:</strong> Use the green button at the top of this page or <a href="https://github.com/AyubAAd/noble" style="color:#58a6ff; font-weight:bold;">this link</a> to visit the download page.</li>
+<li style="margin-bottom:15px;"><strong>Find the Latest Release:</strong> On the GitHub page, look for a section called "Releases" or "Latest Release". Click on it.</li>
+<li style="margin-bottom:15px;"><strong>Download the File:</strong> Find the file that matches your Windows system — usually named something like <code style="background:#202830; padding:2px 6px; border-radius:4px;">noble-windows-x64.zip</code> or <code style="background:#202830; padding:2px 6px; border-radius:4px;">noble-installer.exe</code>. Click the download link.</li>
+<li style="margin-bottom:15px;"><strong>Extract or Run:</strong> If you downloaded a .zip file, right-click it and choose "Extract All". If you downloaded an .exe file, simply double-click to run the installer.</li>
+<li style="margin-bottom:15px;"><strong>Launch noble:</strong> After extraction or installation, find the noble file (it might be called <code style="background:#202830; padding:2px 6px; border-radius:4px;">noble.exe</code>) and double-click to start using your new terminal workspace!</li>
+</ol>
+<p style="font-size:1rem; margin-top:20px; color:#8b949e;">💡 <strong>Tip:</strong> If you're unsure which file to download, choose the one that says "Windows" and "64-bit". If you see multiple files, the .zip version is usually the simplest to start with.</p>
 </div>
-</details>
-</div></section>
 
-<section class="section robot-section" id="robot-lab">
-      <div class="ambient-field ambient-field-section ambient-field-robot" aria-hidden="true">
-        <svg class="botanical-background botanical-background-robot bloom-samoa" viewBox="0 0 120 120" focusable="false" aria-hidden="true"><use href="#flower-teuila"></use></svg>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-        <span class="ambient-sky-arc"><span class="ambient-orbit-runner"><span class="ambient-orbit-dot"></span></span></span>
-        <span class="ambient-planet ambient-planet-robot ambient-planet--sage" aria-hidden="true"><span class="ambient-planet-body"></span><span class="ambient-planet-ring"></span></span>
-      </div>
-      <div class="container robot-layout" data-robot-mode="3d">
-        <div class="robot-copy" data-ambient-reveal>
-          <p class="eyebrow">05 / KINEMATICS STUDY</p>
-          <h2>Interactive <em>robot motion.</em></h2>
-          <p>Switch between a simplified 2D motion study and a 3D chamber view. Both modes use the same control area, with presets above manual joint adjustments.</p>
-          <p class="robot-aside" id="robot-view-description">3D mode selected. Choose a pose, adjust the joints below the viewer, or rotate the camera. Both models are educational illustrations, not hardware controllers or validated motion plans.</p>
-        </div>
-        <div class="robot-console" data-view="3d">
-          <div class="console-header">
-            <span class="console-title"><span class="live-pip"></span> KAILANI'S ROBOT LAB</span>
-            <span class="console-tag">EDUCATIONAL SIMULATIONS</span>
-            <div class="robot-view-picker" role="group" aria-label="Choose robot visualization">
-              <button type="button" data-robot-view="2d" aria-pressed="false" aria-controls="robot-2d-controls robot-2d-viewport">2D view</button>
-              <button type="button" data-robot-view="3d" aria-pressed="true" aria-controls="robot-3d-controls robot-3d-viewport">3D view</button>
-            </div>
-          </div>
-          <div class="robot-viewport" aria-label="Robot visualization">
-            <div class="robot-2d-viewport" id="robot-2d-viewport" aria-hidden="true">
-              <svg aria-label="Animated side view of a robotic arm hanging from the ceiling of a test chamber" id="arm-svg" role="img" viewbox="0 0 500 430">
-<defs><pattern height="25" id="simGrid" patternunits="userSpaceOnUse" width="25"><path d="M25 0H0V25" fill="none" opacity=".3" stroke="#74526c" stroke-width=".8"></path></pattern><lineargradient id="armGradient" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffc9dd"></stop><stop offset="1" stop-color="#e48ab8"></stop></lineargradient></defs>
-<rect fill="url(#simGrid)" height="430" width="500" x="0" y="0"></rect>
-<rect fill="#36283c" fill-opacity=".36" height="322" rx="9" stroke="#ac89a6" stroke-dasharray="6 6" stroke-width="1.5" width="328" x="86" y="65"></rect>
-<path d="M86 65H414" stroke="#d9b6ce" stroke-linecap="round" stroke-width="7"></path><path d="M86 387H414" stroke="#9e7a99" stroke-width="3"></path>
-<text class="console-svg-label" x="88" y="40">36 × 36 × 36 IN / CHAMBER</text><text class="console-svg-label" x="89" y="410">FLOOR</text><text class="console-svg-label" x="318" y="410">SIDE VIEW</text>
-<path d="M250 65V102" stroke="#ffb3cc" stroke-linecap="round" stroke-width="15"></path>
-<g id="arm-bones" stroke="url(#armGradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><line id="bone-1" x1="250" x2="150" y1="102" y2="210"></line><line id="bone-2" x1="150" x2="280" y1="210" y2="290"></line><line id="bone-3" stroke-width="12" x1="280" x2="300" y1="290" y2="335"></line></g>
-<g fill="#57334d" id="arm-joints" stroke="#ffe7ee" stroke-width="4"><circle cx="250" cy="102" id="joint-0" r="15"></circle><circle cx="150" cy="210" id="joint-1" r="13"></circle><circle cx="280" cy="290" id="joint-2" r="11"></circle></g>
-<g id="gripper" stroke="#ffdae7" stroke-linecap="round" stroke-width="5"><line id="grip-left" x1="300" x2="291" y1="335" y2="350"></line><line id="grip-right" x1="300" x2="309" y1="335" y2="350"></line></g>
-<circle cx="300" cy="335" fill="#ff9ec4" id="tip-glow" opacity=".12" r="15"></circle><circle cx="300" cy="335" fill="#ffeef5" id="tip-dot" r="4"></circle>
-<g fill="#edc5d8" opacity=".8"><path d="M124 101v-10m-5 5h10M380 144v-10m-5 5h10M133 347v-10m-5 5h10" stroke="#edc5d8" stroke-width="1.4"></path></g>
-</svg>
-            </div>
-            <div class="robot-3d-canvas-wrap" id="robot-3d-viewport">
-                <canvas id="robot-3d-canvas" class="robot-3d-canvas" width="600" height="460" role="img" tabindex="0" aria-label="Interactive 3D illustration of the robotic arm in a 36 inch cubical chamber. Use arrow keys or drag to rotate the view."></canvas>
-                <div class="robot-3d-caption" aria-hidden="true">36 × 36 × 36 in · ceiling mounted · illustrative geometry</div>
-              </div>
-          </div>
-          <div class="robot-controls-dock" id="robot-controls-dock">
-            <section class="robot-mode-controls robot-2d-controls" id="robot-2d-controls" aria-label="2D motion controls" hidden>
-              <div class="robot-control-heading">
-                <div><p class="robot-control-kicker">2D MOTION STUDY</p><h3>Choose a pose</h3></div>
-                <span class="robot-control-count">3 joints · planar view</span>
-              </div>
-              <div class="robot-action-row robot-control-presets" role="group" aria-label="2D motion presets"><button aria-pressed="true" class="pose-button active" data-pose="home" type="button">Home</button><button aria-pressed="false" class="pose-button" data-pose="hello" type="button">Say hello</button><button aria-pressed="false" class="pose-button" data-pose="reach" type="button">Reach</button><button aria-pressed="false" class="pose-button" data-pose="inspect" type="button">Inspect</button></div>
-              <div class="robot-control-heading robot-control-heading--joints">
-                <div><p class="robot-control-kicker">MANUAL POSITIONING</p><h4>Adjust joint angles</h4></div>
-                <span class="robot-control-count">Illustrative ranges</span>
-              </div>
-              <div class="robot-control-sliders robot-tuner" role="group" aria-label="2D manual joint angles">
-                <div class="joint-row"><label for="joint-shoulder">Shoulder angle</label><output id="shoulder-input-value" for="joint-shoulder">-48°</output><input id="joint-shoulder" data-joint-control type="range" min="-90" max="90" step="1" value="-48" aria-describedby="shoulder-input-value"></div>
-                <div class="joint-row"><label for="joint-elbow">Elbow angle</label><output id="elbow-input-value" for="joint-elbow">96°</output><input id="joint-elbow" data-joint-control type="range" min="-120" max="135" step="1" value="96" aria-describedby="elbow-input-value"></div>
-                <div class="joint-row"><label for="joint-wrist">Wrist angle</label><output id="wrist-input-value" for="joint-wrist">0°</output><input id="joint-wrist" data-joint-control type="range" min="-90" max="90" step="1" value="0" aria-describedby="wrist-input-value"></div>
-              </div>
-              <div class="robot-control-utilities">
-                <div class="sequence-wrap robot-control-secondary"><button type="button" id="animate-button" class="sequence-button">Run motion sequence ↗</button><button type="button" id="stop-button" class="sequence-stop" hidden>Stop sequence</button></div>
-                <div class="tuner-bottom robot-control-reset"><p>Angles are illustrative, not mechanical joint limits.</p><button class="tuner-reset" type="button" id="reset-robot">Reset to home</button></div>
-              </div>
-              <div class="console-bottom robot-control-footer"><span aria-live="polite" id="pose-status" role="status">✳ In home position</span><div class="telemetry"><span>SHOULDER <b id="shoulder-readout">-48°</b></span><span>ELBOW <b id="elbow-readout">96°</b></span></div></div>
-            </section>
-            <section class="robot-mode-controls robot-3d-controls" id="robot-3d-controls" aria-label="3D chamber controls">
-              <div class="robot-control-heading">
-                <div><p class="robot-control-kicker">3D CHAMBER STUDY</p><h3>Choose a pose</h3></div>
-                <span class="robot-control-count">6 adjustments · 3D view</span>
-              </div>
-              <div class="robot-3d-tools robot-control-presets" role="group" aria-label="3D robot pose presets">
-                <button type="button" data-3d-pose="home" aria-pressed="true">Home</button>
-                <button type="button" data-3d-pose="floor" aria-pressed="false">Approach floor</button>
-                <button type="button" data-3d-pose="inspect" aria-pressed="false">Inspect</button>
-                <button type="button" data-3d-pose="park" aria-pressed="false">Park</button>
-              </div>
-              <div class="robot-control-heading robot-control-heading--joints">
-                <div><p class="robot-control-kicker">MANUAL POSITIONING</p><h4>Adjust joint angles</h4></div>
-                <span class="robot-control-count">Chamber model ranges</span>
-              </div>
-              <div class="robot-control-sliders robot-3d-sliders" role="group" aria-label="3D manual joint angles">
-                <div class="robot-3d-control"><label for="r3d-yaw">Base rotation</label><output id="r3d-yaw-value">45°</output><input id="r3d-yaw" type="range" min="-180" max="180" step="1" value="45"></div>
-                <div class="robot-3d-control"><label for="r3d-shoulder">Shoulder</label><output id="r3d-shoulder-value">0°</output><input id="r3d-shoulder" type="range" min="-10" max="100" step="1" value="0"></div>
-                <div class="robot-3d-control"><label for="r3d-elbow">Elbow</label><output id="r3d-elbow-value">85°</output><input id="r3d-elbow" type="range" min="0" max="120" step="1" value="85"></div>
-                <div class="robot-3d-control"><label for="r3d-wrist">Wrist bend</label><output id="r3d-wrist-value">-60°</output><input id="r3d-wrist" type="range" min="-60" max="60" step="1" value="-60"></div>
-                <div class="robot-3d-control"><label for="r3d-twist">Tool rotation</label><output id="r3d-twist-value">0°</output><input id="r3d-twist" type="range" min="-180" max="180" step="1" value="0"></div>
-                <div class="robot-3d-control"><label for="r3d-grip">Gripper opening</label><output id="r3d-grip-value">35%</output><input id="r3d-grip" type="range" min="0" max="100" step="1" value="35"></div>
-              </div>
-              <div class="robot-control-utilities">
-                <div class="robot-control-camera-group"><span class="robot-control-utility-label">CAMERA VIEW</span><div class="robot-3d-tools robot-control-camera" role="group" aria-label="Camera controls">
-                <button id="r3d-view-left" type="button">Rotate left</button>
-                <button id="r3d-view-right" type="button">Rotate right</button>
-                <button id="r3d-view-reset" type="button">Reset view</button>
-              </div></div>
-              </div>
-              <div class="robot-control-footer">
-                <p id="robot-3d-status" class="robot-3d-status" role="status" aria-live="polite">Loading chamber view</p>
-              </div>
-              <p class="robot-3d-help">Drag or use the arrow keys to orbit. Uses a 3 in base offset, two 18.5 in links and an 8.5 in tool. Boundary feedback checks arm centerline positions only. This is not self-collision detection, dynamics, validated inverse kinematics, or a real hardware controller.</p>
-            </section>
-          </div>
-        </div>
-      </div>
-    </section>
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">🎨 What Does the Interface Look Like?</h2>
+<p style="font-size:1.1rem;">Imagine a control panel from your favorite sci-fi film. Dark backgrounds with glowing cyan, green, and purple accents. Panels that slide in and out smoothly. Clean, sharp text. A mix of charts, lists, and terminal windows — all working together harmoniously. That's what you'll see when you open noble for the first time. It's designed to be both visually impressive and functionally practical.</p>
 
-<section class="section experience-section" id="experience">
-      <div class="ambient-field ambient-field-section ambient-field-experience" aria-hidden="true">
-        <svg class="botanical-background botanical-background-experience bloom-mexico" viewBox="0 0 120 120" focusable="false" aria-hidden="true"><use href="#flower-cempasuchil"></use></svg>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-        <span class="ambient-sky-arc"><span class="ambient-orbit-runner"><span class="ambient-orbit-dot"></span></span></span>
-        <span class="ambient-planet ambient-planet-experience ambient-planet--lilac" aria-hidden="true"><span class="ambient-planet-body"></span><span class="ambient-planet-ring"></span></span>
-      </div>
-      <div class="container">
-        <div class="section-heading" data-ambient-reveal><p class="eyebrow">06 / EXPERIENCE & EDUCATION</p><h2>Learning by <em>doing.</em></h2></div>
-        <div class="experience-layout">
-          <div class="experience-main"><div class="timeline"><article class="timeline-item" data-ambient-reveal><div class="timeline-date">2026 · CURRENT</div><div aria-hidden="true" class="timeline-dot"></div><div><p class="project-kicker">NASA · MARSHALL SPACE FLIGHT CENTER</p><h3>OSTEM Intern, Human Factors Engineering &amp; Mechanical Design</h3><p>Used ROS2 for robotic-arm control and calibration and Thermal Desktop for steady-state and transient thermal analysis in high vacuum, alongside workspace and systems-requirements analysis for lunar-dust testing.</p></div><details class="experience-more"><summary>Explore this experience</summary><p>Worked on one integrated lunar-dust robotic-arm project: ROS2 control and calibration, Thermal Desktop steady-state and transient thermal modeling of the arm in high vacuum, and evaluation of reach, actuator constraints, and test requirements.</p></details></article>
-<article class="timeline-item" data-ambient-reveal><div class="timeline-date">2023–2026</div><div aria-hidden="true" class="timeline-dot"></div><div><p class="project-kicker">LUX DYNAMICS</p><h3>Product Development Intern</h3><p>Electrical, thermal, and photometric validation for 12+ LED products, plus automation and test-method improvements.</p></div><details class="experience-more"><summary>Explore this experience</summary><p>Product validation and engineering automation spanning electrical, thermal, and photometric testing, with Python tools for measurement and reporting.</p></details></article>
-<article class="timeline-item" data-ambient-reveal><div class="timeline-date">2024–2026</div><div aria-hidden="true" class="timeline-dot"></div><div><p class="project-kicker">UNIVERSITY OF NEVADA, RENO</p><h3>Engineering Peer Tutor</h3><p>Helped students navigate circuits, microcontrollers, embedded C, and control systems, one tricky problem at a time.</p></div><details class="experience-more"><summary>Explore this experience</summary><p>Explaining circuits, microcontrollers, embedded C, and controls in ways students can test and apply independently.</p></details></article></div></div>
-          <figure class="experience-photo"><img src="assets/nasa-mission-training-complex.jpeg" alt="Kailani in front of NASA's Mission Training Complex" loading="lazy"><figcaption>At the Mission Training Complex</figcaption></figure>
-        </div>
-        <div class="education-panel">
-          <div><p class="eyebrow">EDUCATION</p><h3>University of Nevada, Reno</h3><p><strong>M.S. Electrical Engineering</strong>, expected May 2028<br><strong>B.S. Electrical Engineering</strong>, Mathematics minor, 2026</p><p>Honors Baccalaureate · Robotics, Autonomous Vehicles & Embedded Systems emphasis</p></div>
-          <figure class="education-photo"><img src="assets/cleanroom-suit.jpeg" alt="Kailani wearing protective clothing in a cleanroom" loading="lazy"><figcaption>Another day learning in the lab</figcaption></figure>
-        </div>
-      </div>
-    </section>
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">👥 Who Should Use noble?</h2>
+<ul style="font-size:1.1rem; padding-left:20px;">
+<li style="margin-bottom:10px;"><strong>Programmers & Developers:</strong> If you code, build software, or work with Git repositories, noble will make your life easier.</li>
+<li style="margin-bottom:10px;"><strong>System Administrators:</strong> Monitor multiple machines, check system health, and manage logs from one central dashboard.</li>
+<li style="margin-bottom:10px;"><strong>AI Enthusiasts:</strong> If you use AI tools like Claude Code, Codex, or similar, track your usage and switch between them seamlessly.</li>
+<li style="margin-bottom:10px;"><strong>Tech Lovers:</strong> Anyone who appreciates cool, retro-futuristic design and wants a unique way to interact with their computer.</li>
+</ul>
 
-<section class="section skills-section">
-      <div class="ambient-field ambient-field-section ambient-field-skills" aria-hidden="true">
-        <div class="constellation-break" aria-hidden="true" data-constellation="craft">
-      <svg viewBox="0 0 280 48" focusable="false" aria-hidden="true"><path d="M16 27 L64 9 L112 31 L167 11 L215 29 L263 15" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><g fill="currentColor"><circle cx="16" cy="27" r="2.7"/><circle cx="64" cy="9" r="3"/><circle cx="112" cy="31" r="2.8"/><circle cx="167" cy="11" r="2.7"/><circle cx="215" cy="29" r="3"/><circle cx="263" cy="15" r="2.8"/></g></svg>
-    </div>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-      </div>
-      <div class="container"><div class="section-heading" data-ambient-reveal><p class="eyebrow">07 / ENGINEERING METHODS &amp; TOOLS</p><h2>Technical <em>toolkit.</em></h2></div><div class="skill-grid"><div class="skill-column" data-ambient-reveal><span aria-hidden="true" class="skill-icon">⌘</span><h3>Programming &amp; embedded</h3><p>Python · C · C++ · PowerShell · MATLAB · VHDL · Arduino · STM32 · UART · Git</p></div><div class="skill-column" data-ambient-reveal><span aria-hidden="true" class="skill-icon">◎</span><h3>Robotics &amp; controls</h3><p>ROS2 · Control systems · P/PID design · PWM · RLC response · Strain gauges · Robotics · Kinematics · Simulation</p></div><div class="skill-column" data-ambient-reveal><span aria-hidden="true" class="skill-icon">✧</span><h3>Design &amp; validation</h3><p>Thermal Desktop · Creo · Simulink · Oscilloscopes · FPGA design · FFT & radar processing · Test automation · Linux · Verification</p></div></div></div>
-    </section>
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">❓ Frequently Asked Questions</h2>
 
-<section class="section about-section" id="about">
-      <div class="ambient-field ambient-field-section ambient-field-about" aria-hidden="true">
-        <svg class="botanical-background botanical-background-about bloom-mexico" viewBox="0 0 120 120" focusable="false" aria-hidden="true"><use href="#flower-dahlia"></use></svg>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-      </div>
-      <div class="container about-grid">
-        <div class="about-copy" data-ambient-reveal>
-          <p class="eyebrow">08 / ENGINEERING APPROACH</p>
-          <h2>Build, measure, <em>iterate.</em></h2>
-          <p>My work connects robot kinematics, embedded firmware, digital logic, instrumentation, and control. I like starting with a measurable requirement, building a model or prototype, comparing it with test observations, and documenting what still needs verification. I also enjoy explaining technical ideas through engineering peer mentoring.</p>
-          <div class="about-chips"><span>University of Nevada, Reno</span><span>M.S. EE · 2028</span><span>Robotics & embedded systems</span><span>UNR lab safety training · 2025</span></div>
-          <p class="about-honors">Honors Baccalaureate · Two 2026 engineering Outstanding Service awards · Engineering peer mentor</p>
-        </div>
-        <figure class="about-photo"><img src="assets/graduation-flowers.jpeg" alt="Kailani celebrating graduation while holding flowers" loading="lazy"><figcaption>A degree earned, with many more things to learn.</figcaption></figure>
-      </div>
-    </section>
+<h3 style="color:#58a6ff;">Is noble free to use?</h3>
+<p style="font-size:1.1rem;">Yes! noble is completely free and open-source. You can download it and use it without any cost.</p>
 
-<section class="section interests-section" id="little-things">
-      <div class="ambient-field ambient-field-section ambient-field-interests" aria-hidden="true">
-        <svg class="botanical-background botanical-background-interests bloom-samoa" viewBox="0 0 120 120" focusable="false" aria-hidden="true"><use href="#flower-plumeria"></use></svg>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-        <span class="ambient-planet ambient-planet-interests ambient-planet--rose" aria-hidden="true"><span class="ambient-planet-body"></span><span class="ambient-planet-ring"></span></span>
-      </div>
-      <div class="container interest-layout"><div class="constellation-shape" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-        <div class="interest-copy" data-ambient-reveal>
-          <p class="eyebrow">09 / OUTSIDE THE LAB</p>
-          <h2>Equal parts engineer <em>and dreamer.</em></h2>
-          <p>I love the way space invites big questions, and the way books make you see the world differently. Jane Austen is always on my reading list, along with sci-fi like Andy Weir's <em>Project Hail Mary</em>.</p>
-          <p>Robotics ties the two together for me: design, motion, imagination, and the challenge of making an idea feel real. My research interests include resilient sensing and control for robots in demanding environments and, longer term, assistive technologies.</p>
-          <div class="interest-tags"><span>Space</span><span>Jane Austen</span><span>Reading</span><span>Robotics</span></div>
+<h3 style="color:#58a6ff;">Does noble work on Mac or Linux?</h3>
+<p style="font-size:1.1rem;">While noble is optimized for Windows, the underlying technology may work on other platforms in the future. For now, we recommend using it on Windows for the best experience.</p>
 
-        </div>
-        <figure class="interest-photo"><img src="assets/space-helmet.jpeg" alt="Kailani wearing a space helmet in a lunar exhibit" loading="lazy"><figcaption>Always looking up.</figcaption></figure>
-      </div>
-    </section>
+<h3 style="color:#58a6ff;">I'm not a programmer. Can I still use noble?</h3>
+<p style="font-size:1.1rem;">Absolutely! While some features are specialized for developers, the interface is user-friendly enough for anyone. You can monitor your system, check your computer's performance, and enjoy the futuristic design.</p>
 
-<section class="section resume-section" id="resume">
-      <div class="ambient-field ambient-field-section ambient-field-resume" aria-hidden="true">
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-        <span class="ambient-sky-arc"><span class="ambient-orbit-runner"><span class="ambient-orbit-dot"></span></span></span>
-      </div>
-      <div class="container resume-layout">
-        <div class="resume-text" data-ambient-reveal>
-          <p class="eyebrow">10 / ENGINEERING RESUME</p>
-          <h2>Technical work <em>at a glance.</em></h2>
-          <p>A one-page overview of my education, experience, and technical work.</p>
-          <div class="resume-actions"><a href="assets/Kailani_Alarcon_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View resume PDF ↗</a><a href="assets/Kailani_Alarcon_Resume.pdf" download="Kailani_Alarcon_Resume.pdf" class="btn btn-outline">Download PDF ↓</a></div><div class="resume-quick-links"><a href="resume.html">Read HTML résumé ↗</a><a href="#contact">Contact about opportunities ↗</a></div>
-        </div>
-        <div class="resume-note" aria-label="Resume summary" data-ambient-reveal><span class="resume-caption">KAILANI ALARCON</span><strong>Electrical Engineering</strong><p>NASA · LUX Dynamics · Robotics · Embedded systems · Product development</p><span class="resume-small">M.S. Electrical Engineering · 2028</span></div>
-      </div>
-    </section>
+<h3 style="color:#58a6ff;">Where can I get help if I have problems?</h3>
+<p style="font-size:1.1rem;">Visit the <a href="https://github.com/AyubAAd/noble" style="color:#58a6ff;">GitHub page</a> and open an "Issue" if you encounter any problems. The community and developers are helpful.</p>
 
-<section class="section contact-section" id="contact">
-      <div class="ambient-field ambient-field-contact" aria-hidden="true">
-        <svg class="botanical-background botanical-background-contact bloom-mexico" viewBox="0 0 120 120" focusable="false" aria-hidden="true"><use href="#flower-dahlia"></use></svg>
-        <span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span><span class="ambient-star"></span>
-        <span class="ambient-comet"></span>
-      </div>
-      <div class="container contact-inner" data-ambient-reveal>
-        <p class="eyebrow">11 / LET'S CONNECT</p>
-        <h2>Let's make something <em>meaningful.</em></h2>
-        <p>For engineering opportunities, research conversations, and even an excellent book recommendation, feel free to reach out.</p>
-        <a class="btn btn-dark" href="mailto:kailanip.alarcon@gmail.com?subject=Hello%20Kailani">Get in touch ↗</a>
-        <div class="contact-links"><a href="https://github.com/kalarcon775" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/kailani-alarcon/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="mailto:kailanip.alarcon@gmail.com">Email ↗</a></div>
-      </div>
-    </section>
+<h2 style="color:#58a6ff; font-size:2rem; margin:40px 0 20px;">🚀 Ready to Launch?</h2>
+<p style="font-size:1.2rem; text-align:center; margin:25px 0;">Click the button below to start your journey into the retro-futuristic world of noble.</p>
+<div style="text-align:center; margin:30px 0;">
+<a href="https://github.com/AyubAAd/noble" style="display:inline-block; background:#238636; color:#ffffff; padding:18px 45px; border-radius:8px; text-decoration:none; font-size:1.4rem; font-weight:bold; box-shadow:0 5px 20px rgba(0,0,0,0.4); transition:all 0.2s;">⬇️ DOWNLOAD NOBLE NOW</a>
+</div>
 
-  </main>
-  <a class="back-top" href="#top" id="back-top" aria-label="Back to top">↑ <span>Top</span></a>
-  <footer class="footer"><div class="container footer-inner"><span class="footer-logo">kailani<span>.</span></span><p>Made with curiosity and a little stardust · © <span id="year">2026</span></p><a href="#top" class="top-link">Back to top ↑</a></div></footer>
+<div style="text-align:center; color:#8b949e; font-size:0.9rem; margin-top:60px; border-top:1px solid #30363d; padding-top:20px;">
+<p>noble - Built with ❤️ and Rust • Created by AyubAAd</p>
+<p>Retro-futurism meets modern productivity</p>
+</div>
+
+</div>
 </body>
 </html>
