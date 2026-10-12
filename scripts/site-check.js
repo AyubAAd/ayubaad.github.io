@@ -87,7 +87,7 @@ for(const width of [280,284,320,375,390,550,700,701,820,980]){
     'back-left':Math.min(70,Math.max(56,width*.18))
   }:{front:154,right:108,left:108,'back-right':92,'back-left':92};
   const planets=[
-    {slot:'front',x:0,y:mobile?97:106},
+    {slot:'front',x:0,y:mobile?80:106},
     {slot:'right',x:xSide,y:mobile?48:55},
     {slot:'back-right',x:xRear,y:mobile?-88:-96},
     {slot:'back-left',x:-xRear,y:mobile?-88:-96},
