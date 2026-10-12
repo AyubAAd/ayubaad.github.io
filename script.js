@@ -83,234 +83,208 @@ if(sequenceButton)sequenceButton.addEventListener('click',()=>{
 });
 renderArm(angles);
 
-// Repository discovery + solar-system carousel. No external services or accounts needed.
-const repoCards = [...document.querySelectorAll('.repo-card')];
+// Stable five-planet carousel. Dedicated buttons orbit; project text stays still.
+const repoCards = [...document.querySelectorAll('#repo-grid .repo-card')];
+const repoPlanets = [...document.querySelectorAll('[data-planet-select]')];
 const repoFilters = [...document.querySelectorAll('.repo-filter')];
 const repoSearch = document.getElementById('repo-search');
 const repoResultCount = document.getElementById('repo-results');
 const repoEmpty = document.getElementById('repo-empty');
 const repoOrbitShell = document.getElementById('repo-orbit-shell');
-const repoOrbitStage = document.getElementById('repo-grid');
+const repoOrbitStage = document.getElementById('repo-planetarium');
+const repoGrid = document.getElementById('repo-grid');
 const repoOrbitControls = document.getElementById('repo-orbit-controls');
 const repoOrbitHint = document.getElementById('repo-orbit-hint');
 const repoOrbitReadout = document.getElementById('repo-orbit-readout');
 const repoOrbitPrev = document.getElementById('repo-orbit-prev');
 const repoOrbitNext = document.getElementById('repo-orbit-next');
+const repoFeatured = document.getElementById('repo-featured');
+const repoFeaturedTitle = document.getElementById('repo-featured-title');
+const repoFeaturedDesc = document.getElementById('repo-featured-desc');
+const repoFeaturedTags = document.getElementById('repo-featured-tags');
+const repoFeaturedLink = document.getElementById('repo-featured-link');
+const repoFeaturedCount = document.getElementById('repo-featured-count');
+const repoByPlanet = new Map(repoCards.map(card => [card.dataset.planet, card]));
 let repoCategory = 'all';
 let featuredRepo = repoCards[0] || null;
-const orbitReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const orbitLayouts = {
-  1: ['front'],
-  2: ['front', 'right'],
-  3: ['front', 'right', 'left'],
-  4: ['front', 'right', 'back', 'left'],
-  5: ['front', 'right', 'back-right', 'back-left', 'left']
+const repoSlotSets = {
+  1:['front'],
+  2:['front','right'],
+  3:['front','right','left'],
+  4:['front','right','back-left','left'],
+  5:['front','right','back-right','back-left','left']
 };
-let orbitPhase = 0;
-let orbitTargetPhase = 0;
-let orbitFrame = 0;
-const orbitCycle = 2 * Math.PI;
-
+const repoOrbitEnabled = !!(repoOrbitStage && repoGrid && repoOrbitShell &&
+  repoFeatured && repoFeaturedTitle && repoFeaturedDesc &&
+  repoFeaturedTags && repoFeaturedLink && repoFeaturedCount &&
+  repoPlanets.length === 5 && repoCards.length === 5 &&
+  repoPlanets.every(planet => repoByPlanet.has(planet.dataset.planetSelect)));
 function visibleRepos(){
   return repoCards.filter(card => !card.hidden);
 }
-
-// Paint positions along an ellipse. Sine moves planets left/right while cosine
-// moves them forward/back; scale and stacking order convey the changing depth.
-// All five planets remain on-screen, including the two behind the orbit.
+function planetSlotStyle(slot, width){
+  const mobile = width <= 700;
+  const xSide = Math.min(335,width * (mobile ? .295 : .345));
+  const xRear = Math.min(205,width * (mobile ? .235 : .215));
+  if(mobile){
+    const sizes = {
+      front:Math.min(142,Math.max(108,width*.38)),
+      right:Math.min(86,Math.max(66,width*.23)),
+      left:Math.min(86,Math.max(66,width*.23)),
+      'back-right':Math.min(70,Math.max(56,width*.18)),
+      'back-left':Math.min(70,Math.max(56,width*.18))
+    };
+    return {
+      front:[0,97,sizes.front],
+      right:[xSide,48,sizes.right],
+      left:[-xSide,48,sizes.left],
+      'back-right':[xRear,-88,sizes['back-right']],
+      'back-left':[-xRear,-88,sizes['back-left']]
+    }[slot];
+  }
+  return {
+    front:[0,106,154],
+    right:[xSide,55,108],
+    left:[-xSide,55,108],
+    'back-right':[xRear,-96,92],
+    'back-left':[-xRear,-96,92]
+  }[slot];
+}
 function paintRepoOrbit(){
-  if(!repoOrbitShell || !repoOrbitStage || !repoCards.length)return;
-  const available = visibleRepos();
-  const count = available.length;
-  if(!count)return;
+  if(!repoOrbitEnabled)return;
   const width = repoOrbitStage.clientWidth || 980;
-  const mobile = width <= 550;
-  const radiusX = Math.min(335, width * (mobile ? 0.315 : 0.345));
-  available.forEach((card, index) => {
-    const angle = orbitCycle * index / count - orbitPhase;
-    const sine = Math.sin(angle);
-    const cosine = Math.cos(angle);
-    const proximity = (1 + cosine) / 2;
-    const x = radiusX * sine;
-    const y = 105 * cosine - 30 * Math.abs(sine);
-    const scale = mobile
-      ? 0.32 + 0.60 * Math.pow(proximity, 3)
-      : 0.48 + 0.47 * Math.pow(proximity, 2);
-    card.style.setProperty('--x', x.toFixed(1) + 'px');
-    card.style.setProperty('--y', y.toFixed(1) + 'px');
-    card.style.setProperty('--scale', scale.toFixed(3));
-    card.style.zIndex = String(Math.round(2 + 6 * proximity));
-    card.style.opacity = (0.78 + 0.22 * proximity).toFixed(3);
+  repoPlanets.forEach(planet=>{
+    if(planet.hidden)return;
+    const slot = planet.dataset.slot;
+    const coords = planetSlotStyle(slot,width);
+    if(!coords)return;
+    const [x,y,size] = coords;
+    planet.style.setProperty('--x',x.toFixed(1)+'px');
+    planet.style.setProperty('--y',y.toFixed(1)+'px');
+    planet.style.setProperty('--size',size.toFixed(1)+'px');
+    planet.style.zIndex = slot === 'front' ? '6' :
+      slot === 'left' || slot === 'right' ? '5' : '3';
   });
 }
 function renderRepoOrbit(){
-  if(!repoOrbitShell || !repoOrbitStage || !repoCards.length)return;
+  if(!repoOrbitEnabled)return;
   const available = visibleRepos();
-  repoOrbitShell.hidden = available.length === 0;
-  if(!available.length){
-    if(repoOrbitControls)repoOrbitControls.hidden = true;
-    return;
-  }
+  if(repoOrbitShell)repoOrbitShell.hidden = available.length === 0;
+  if(repoOrbitControls)repoOrbitControls.hidden = available.length === 0;
+  if(!available.length)return;
   if(!available.includes(featuredRepo))featuredRepo = available[0];
-  const activeIndex = available.indexOf(featuredRepo);
-  const positions = orbitLayouts[available.length] || orbitLayouts[5];
-  repoCards.forEach(card => {
-    const offset = available.indexOf(card);
-    const present = offset !== -1;
-    const step = present ? (offset - activeIndex + available.length) % available.length : -1;
-    const position = step === -1 ? 'hidden' : positions[step];
-    const isFront = position === 'front';
-    card.dataset.orbitPosition = position;
-    card.setAttribute('aria-current', isFront ? 'true' : 'false');
-    const link = card.querySelector('.repo-link');
-    if(link)link.tabIndex = isFront ? 0 : -1;
-    const select = card.querySelector('.repo-orbit-select');
-    if(select){
-      select.hidden = !present || isFront;
-      select.disabled = !present || isFront;
-      select.tabIndex = !present || isFront ? -1 : 0;
-    }
+  const focusedIndex = available.indexOf(featuredRepo);
+  const slots = repoSlotSets[available.length];
+  repoPlanets.forEach(planet=>{
+    const card = repoByPlanet.get(planet.dataset.planetSelect);
+    const index = available.indexOf(card);
+    const isAvailable = index !== -1;
+    planet.hidden = !isAvailable;
+    if(!isAvailable)return;
+    const offset = (index-focusedIndex+available.length)%available.length;
+    const slot = slots[offset];
+    planet.dataset.slot = slot;
+    planet.setAttribute('aria-pressed',String(slot === 'front'));
   });
-  if(repoOrbitControls){
-    repoOrbitControls.hidden = false;
-    if(repoOrbitPrev)repoOrbitPrev.disabled = available.length < 2;
-    if(repoOrbitNext)repoOrbitNext.disabled = available.length < 2;
+  const title = featuredRepo.querySelector('h3')?.textContent?.trim() || 'Repository';
+  repoFeaturedTitle.textContent = title;
+  repoFeaturedDesc.textContent = featuredRepo.querySelector('p')?.textContent?.trim() || '';
+  const source = featuredRepo.querySelector('.repo-link');
+  if(source){
+    repoFeaturedLink.href = source.href;
+    repoFeaturedLink.setAttribute('aria-label','Open '+title+' on GitHub');
   }
-  if(repoOrbitReadout){
-    repoOrbitReadout.textContent = String(activeIndex + 1) + ' / ' + String(available.length);
-    const name = document.createElement('strong');
-    name.textContent = featuredRepo.querySelector('h3')?.textContent || 'Repository';
-    repoOrbitReadout.appendChild(name);
-  }
+  repoFeaturedTags.replaceChildren(...[...featuredRepo.querySelectorAll('.repo-meta span')].map(tag=>{
+    const copy = document.createElement('span');
+    copy.textContent = tag.textContent;
+    return copy;
+  }));
+  repoFeaturedCount.textContent = (focusedIndex+1)+' / '+available.length;
+  if(repoOrbitReadout)repoOrbitReadout.textContent = (focusedIndex+1)+' of '+available.length+' · '+title;
+  if(repoOrbitPrev)repoOrbitPrev.disabled = available.length < 2;
+  if(repoOrbitNext)repoOrbitNext.disabled = available.length < 2;
   paintRepoOrbit();
 }
-function animateRepoOrbit(){
-  if(orbitFrame)cancelAnimationFrame(orbitFrame);
-  orbitFrame = 0;
-  if(orbitReducedMotion.matches || !repoOrbitShell){
-    orbitPhase = orbitTargetPhase;
-    repoOrbitShell?.classList.remove('is-orbit-animating');
-    paintRepoOrbit();
-    return;
+function chooseRepo(card){
+  if(card && !card.hidden){
+    featuredRepo = card;
+    renderRepoOrbit();
   }
-  const initialPhase = orbitPhase;
-  const distance = orbitTargetPhase - initialPhase;
-  const duration = Math.min(1220, 780 + 165 * Math.abs(distance) / (orbitCycle / Math.max(1, visibleRepos().length)));
-  const started = performance.now();
-  repoOrbitShell.classList.add('is-orbit-animating');
-  function frame(now){
-    const progress = Math.min(1, (now - started) / duration);
-    const eased = (1 - Math.cos(Math.PI * progress)) / 2;
-    orbitPhase = initialPhase + distance * eased;
-    paintRepoOrbit();
-    if(progress < 1){
-      orbitFrame = requestAnimationFrame(frame);
-    }else{
-      orbitFrame = 0;
-      orbitPhase = orbitTargetPhase;
-      repoOrbitShell.classList.remove('is-orbit-animating');
-      paintRepoOrbit();
-    }
-  }
-  orbitFrame = requestAnimationFrame(frame);
 }
 function rotateRepo(direction){
   const available = visibleRepos();
   if(available.length < 2)return;
-  const activeIndex = Math.max(0, available.indexOf(featuredRepo));
-  featuredRepo = available[(activeIndex + direction + available.length) % available.length];
-  orbitTargetPhase += direction * orbitCycle / available.length;
-  renderRepoOrbit();
-  animateRepoOrbit();
-}
-function selectRepoPlanet(card){
-  const available = visibleRepos();
-  const index = available.indexOf(card);
-  if(index < 0 || card === featuredRepo)return;
-  const desiredAngle = orbitCycle * index / available.length;
-  // Shortest arc keeps the selected planet visibly on its way to the front.
-  const delta = Math.atan2(
-    Math.sin(desiredAngle - orbitTargetPhase),
-    Math.cos(desiredAngle - orbitTargetPhase)
-  );
-  featuredRepo = card;
-  orbitTargetPhase += delta;
-  renderRepoOrbit();
-  animateRepoOrbit();
-  card.querySelector('.repo-link')?.focus({preventScroll:true});
+  const i = Math.max(0,available.indexOf(featuredRepo));
+  chooseRepo(available[(i+direction+available.length)%available.length]);
 }
 function filterRepos(){
   const query = (repoSearch?.value || '').trim().toLowerCase();
   let count = 0;
-  repoCards.forEach(card => {
-    const categories = (card.dataset.category || '').split(' ');
+  repoCards.forEach(card=>{
+    const types = (card.dataset.category || '').split(' ');
     const haystack = [
       card.querySelector('h3')?.textContent,
       card.querySelector('p')?.textContent,
       card.dataset.keywords
     ].join(' ').toLowerCase();
-    const shown = (repoCategory === 'all' || categories.includes(repoCategory))
+    const shown = (repoCategory==='all' || types.includes(repoCategory))
       && (!query || haystack.includes(query));
     card.hidden = !shown;
     if(shown)count++;
   });
-  if(repoResultCount)repoResultCount.textContent = 'Showing ' + count + ' of ' + repoCards.length + ' projects';
+  if(repoResultCount)repoResultCount.textContent='Showing '+count+' of '+repoCards.length+' projects';
   if(repoEmpty)repoEmpty.hidden = count !== 0;
-  if(orbitFrame)cancelAnimationFrame(orbitFrame);
-  orbitFrame = 0;
-  repoOrbitShell?.classList.remove('is-orbit-animating');
-  const available = visibleRepos();
-  if(available.length){
-    if(!available.includes(featuredRepo))featuredRepo = available[0];
-    orbitPhase = orbitTargetPhase = orbitCycle * available.indexOf(featuredRepo) / available.length;
-  }
-  renderRepoOrbit();
+  if(repoOrbitEnabled)renderRepoOrbit();
 }
-repoFilters.forEach(button => button.addEventListener('click', () => {
-  repoCategory = button.dataset.filter;
-  repoFilters.forEach(filter => {
-    const active = filter === button;
-    filter.classList.toggle('active', active);
-    filter.setAttribute('aria-pressed', String(active));
+repoFilters.forEach(button=>button.addEventListener('click',()=>{
+  repoCategory=button.dataset.filter;
+  repoFilters.forEach(filter=>{
+    const active=filter===button;
+    filter.classList.toggle('active',active);
+    filter.setAttribute('aria-pressed',String(active));
   });
   filterRepos();
 }));
-repoSearch?.addEventListener('input', filterRepos);
-document.getElementById('reset-repos')?.addEventListener('click', () => {
-  if(repoSearch)repoSearch.value = '';
-  repoFilters.find(filter => filter.dataset.filter === 'all')?.click();
+repoSearch?.addEventListener('input',filterRepos);
+document.getElementById('reset-repos')?.addEventListener('click',()=>{
+  if(repoSearch)repoSearch.value='';
+  repoFilters.find(filter=>filter.dataset.filter==='all')?.click();
   repoSearch?.focus();
 });
-if(repoOrbitShell && repoCards.length === 5){
-  // Without JavaScript the original five repository cards remain readable.
+if(repoOrbitEnabled){
+  // The normal five-card list is the fallback if any carousel script fails.
+  repoOrbitStage.hidden=false;
+  repoFeatured.hidden=false;
   repoOrbitShell.classList.add('is-orbit-ready');
-  if(repoOrbitHint)repoOrbitHint.hidden = false;
-  repoOrbitPrev?.addEventListener('click', () => rotateRepo(-1));
-  repoOrbitNext?.addEventListener('click', () => rotateRepo(1));
-  repoCards.forEach(card => {
-    card.querySelector('.repo-orbit-select')?.addEventListener('click', () => selectRepoPlanet(card));
+  if(repoOrbitHint)repoOrbitHint.hidden=false;
+  repoOrbitPrev?.addEventListener('click',()=>rotateRepo(-1));
+  repoOrbitNext?.addEventListener('click',()=>rotateRepo(1));
+  repoPlanets.forEach(planet=>planet.addEventListener('click',()=>{
+    chooseRepo(repoByPlanet.get(planet.dataset.planetSelect));
+  }));
+  repoOrbitStage.addEventListener('keydown',event=>{
+    if(event.key!=='ArrowRight' && event.key!=='ArrowLeft')return;
+    event.preventDefault();
+    rotateRepo(event.key==='ArrowRight'?1:-1);
   });
-  repoOrbitStage?.addEventListener('keydown', event => {
-    if(event.key === 'ArrowRight' || event.key === 'ArrowLeft'){
-      event.preventDefault();
-      rotateRepo(event.key === 'ArrowRight' ? 1 : -1);
+  let touchStart=null;
+  repoOrbitStage.addEventListener('touchstart',event=>{
+    if(event.touches.length===1){
+      touchStart={x:event.touches[0].clientX,y:event.touches[0].clientY};
     }
-  });
-  let touchOrigin = null;
-  repoOrbitStage?.addEventListener('touchstart', event => {
-    if(event.touches.length !== 1)return;
-    touchOrigin = {x:event.touches[0].clientX, y:event.touches[0].clientY};
-  }, {passive:true});
-  repoOrbitStage?.addEventListener('touchend', event => {
-    if(!touchOrigin || event.changedTouches.length !== 1)return;
-    const dx = event.changedTouches[0].clientX - touchOrigin.x;
-    const dy = event.changedTouches[0].clientY - touchOrigin.y;
-    touchOrigin = null;
-    if(Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4){
-      rotateRepo(dx < 0 ? 1 : -1);
-    }
-  }, {passive:true});
-  window.addEventListener('resize', paintRepoOrbit, {passive:true});
+  },{passive:true});
+  repoOrbitStage.addEventListener('touchend',event=>{
+    if(!touchStart || event.changedTouches.length!==1)return;
+    const dx=event.changedTouches[0].clientX-touchStart.x;
+    const dy=event.changedTouches[0].clientY-touchStart.y;
+    touchStart=null;
+    if(Math.abs(dx)>48 && Math.abs(dx)>Math.abs(dy)*1.4)rotateRepo(dx<0?1:-1);
+  },{passive:true});
+  if('ResizeObserver' in window){
+    new ResizeObserver(paintRepoOrbit).observe(repoOrbitStage);
+  }else{
+    window.addEventListener('resize',paintRepoOrbit,{passive:true});
+  }
 }
 filterRepos();
 
