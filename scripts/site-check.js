@@ -37,6 +37,28 @@ for(const file of htmlFiles){
 }
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const directory=fs.readFileSync(path.join(projectDir,'index.html'),'utf8');
+
+// Repository planets stay discoverable via arrows, keyboard, filtering and fallback cards.
+const orbitCss=fs.readFileSync(path.join(root,'repo-orbit.css'),'utf8');
+const repoJs=fs.readFileSync(path.join(root,'script.js'),'utf8');
+check((home.match(/data-planet="/g)||[]).length===5,'Expected five repository planets');
+check((home.match(/class="repo-orbit-select"/g)||[]).length===5,'Planet selection buttons missing');
+check(home.includes('id="repo-orbit-prev"')&&home.includes('id="repo-orbit-next"'),
+  'Previous and next orbital carousel controls required');
+check(home.includes('repo-orbit.css'),'Orbital styles missing');
+check(home.includes('aria-roledescription="carousel"'),'Carousel region needs descriptive semantics');
+check(home.includes('<details class="repo-demos"'),'Video demos should start collapsed');
+check(repoJs.includes('function renderRepoOrbit()')&&repoJs.includes('function rotateRepo(direction)'),
+  'Repository orbit navigation code missing');
+check(repoJs.includes('repoOrbitStage?.addEventListener(\'keydown\''),
+  'Keyboard arrow navigation missing');
+check(repoJs.includes('repoOrbitStage?.addEventListener(\'touchend\''),
+  'Swipe navigation missing');
+check(repoJs.includes('renderRepoOrbit();')&&repoJs.includes('function filterRepos()'),
+  'Filtering must refresh the orbit');
+check(orbitCss.includes('prefers-reduced-motion:reduce'),
+  'The orbital carousel should respect reduced-motion preferences');
+
 check(home.includes('id="robot-3d-canvas"'),'3D viewer missing');
 check(home.includes('id="theme-toggle"'),'Theme toggle missing');
 check(home.includes('data-robot-view="3d"'),'Robot view picker missing');
