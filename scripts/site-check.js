@@ -50,6 +50,40 @@ check(home.includes('aria-roledescription="carousel"'),'Carousel region needs de
 check(home.includes('<details class="repo-demos"'),'Video demos should start collapsed');
 check(repoJs.includes('function renderRepoOrbit()')&&repoJs.includes('function rotateRepo(direction)'),
   'Repository orbit navigation code missing');
+
+check(repoJs.includes('function paintRepoOrbit()') &&
+  repoJs.includes('function animateRepoOrbit()') &&
+  repoJs.includes('Math.sin(angle)') && repoJs.includes('Math.cos(angle)'),
+  'Orbit must animate every planet along a curved depth-aware path');
+check(repoJs.includes('orbitReducedMotion.matches'),
+  'Animation must respect reduced-motion preferences');
+let repositoryScriptParses=true;
+try{
+  new (require('node:vm').Script)(repoJs,{filename:'script.js'});
+}catch(error){
+  repositoryScriptParses=false;
+  console.error(error.message);
+}
+check(repositoryScriptParses,'Repository carousel JavaScript must parse');
+for(const width of [320,390,550,820,980]){
+  const mobile=width<=550;
+  const planetDiameter=mobile?260:330;
+  const height=mobile?470:535;
+  const radius=Math.min(335,width*(mobile?0.315:0.345));
+  for(let i=0;i<5;i++){
+    const theta=Math.PI*2*i/5;
+    const sine=Math.sin(theta),cosine=Math.cos(theta);
+    const proximity=(1+cosine)/2;
+    const x=radius*sine;
+    const y=105*cosine-30*Math.abs(sine);
+    const scale=mobile?0.32+0.60*Math.pow(proximity,3):0.48+0.47*Math.pow(proximity,2);
+    const radiusOnScreen=planetDiameter*scale/2;
+    check(Math.abs(x)+radiusOnScreen<=width/2+0.01 &&
+      Math.abs(y)+radiusOnScreen<=height/2+0.01,
+      'Planet '+(i+1)+' clipped at viewport width '+width);
+  }
+}
+
 check(repoJs.includes('repoOrbitStage?.addEventListener(\'keydown\''),
   'Keyboard arrow navigation missing');
 check(repoJs.includes('repoOrbitStage?.addEventListener(\'touchend\''),
