@@ -200,6 +200,9 @@ if(repoOrbitShell && repoCards.length === 5){
     card.querySelector('.repo-orbit-select')?.addEventListener('click', () => {
       featuredRepo = card;
       renderRepoOrbit();
+      // The planet selection button disappears when its card becomes active:
+      // put keyboard focus on the newly available project link.
+      card.querySelector('.repo-link')?.focus({preventScroll:true});
     });
   });
   repoOrbitStage?.addEventListener('keydown', event => {
