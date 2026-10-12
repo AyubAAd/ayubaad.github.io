@@ -83,25 +83,97 @@ if(sequenceButton)sequenceButton.addEventListener('click',()=>{
 });
 renderArm(angles);
 
-// GitHub project discovery: client-side filtering only, no network calls or tokens.
+// Repository discovery + solar-system carousel. No external services or accounts needed.
 const repoCards = [...document.querySelectorAll('.repo-card')];
 const repoFilters = [...document.querySelectorAll('.repo-filter')];
 const repoSearch = document.getElementById('repo-search');
 const repoResultCount = document.getElementById('repo-results');
 const repoEmpty = document.getElementById('repo-empty');
+const repoOrbitShell = document.getElementById('repo-orbit-shell');
+const repoOrbitStage = document.getElementById('repo-grid');
+const repoOrbitControls = document.getElementById('repo-orbit-controls');
+const repoOrbitHint = document.getElementById('repo-orbit-hint');
+const repoOrbitReadout = document.getElementById('repo-orbit-readout');
+const repoOrbitPrev = document.getElementById('repo-orbit-prev');
+const repoOrbitNext = document.getElementById('repo-orbit-next');
 let repoCategory = 'all';
+let featuredRepo = repoCards[0] || null;
+const orbitLayouts = {
+  1: ['front'],
+  2: ['front', 'right'],
+  3: ['front', 'right', 'left'],
+  4: ['front', 'right', 'back', 'left'],
+  5: ['front', 'right', 'back-right', 'back-left', 'left']
+};
+function visibleRepos(){
+  return repoCards.filter(card => !card.hidden);
+}
+function renderRepoOrbit(){
+  if(!repoOrbitShell || !repoOrbitStage || !repoCards.length)return;
+  const available = visibleRepos();
+  repoOrbitShell.hidden = available.length === 0;
+  if(!available.length){
+    if(repoOrbitControls)repoOrbitControls.hidden = true;
+    return;
+  }
+  if(!available.includes(featuredRepo))featuredRepo = available[0];
+  const activeIndex = available.indexOf(featuredRepo);
+  const positions = orbitLayouts[available.length] || orbitLayouts[5];
+  repoCards.forEach(card => {
+    const present = available.includes(card);
+    const offset = present
+      ? (available.indexOf(card) - activeIndex + available.length) % available.length
+      : -1;
+    const position = offset < 0 ? 'hidden' : positions[offset];
+    const isFront = position === 'front';
+    card.dataset.orbitPosition = position;
+    card.setAttribute('aria-current', isFront ? 'true' : 'false');
+    const link = card.querySelector('.repo-link');
+    if(link)link.tabIndex = isFront ? 0 : -1;
+    const select = card.querySelector('.repo-orbit-select');
+    if(select){
+      select.hidden = !present || isFront;
+      select.disabled = !present || isFront;
+      select.tabIndex = !present || isFront ? -1 : 0;
+    }
+  });
+  if(repoOrbitControls){
+    repoOrbitControls.hidden = false;
+    if(repoOrbitPrev)repoOrbitPrev.disabled = available.length < 2;
+    if(repoOrbitNext)repoOrbitNext.disabled = available.length < 2;
+  }
+  if(repoOrbitReadout){
+    repoOrbitReadout.textContent = String(activeIndex + 1) + ' / ' + String(available.length);
+    const name = document.createElement('strong');
+    name.textContent = featuredRepo.querySelector('h3')?.textContent || 'Repository';
+    repoOrbitReadout.appendChild(name);
+  }
+}
+function rotateRepo(direction){
+  const available = visibleRepos();
+  if(available.length < 2)return;
+  const activeIndex = Math.max(0, available.indexOf(featuredRepo));
+  featuredRepo = available[(activeIndex + direction + available.length) % available.length];
+  renderRepoOrbit();
+}
 function filterRepos(){
   const query = (repoSearch?.value || '').trim().toLowerCase();
   let count = 0;
   repoCards.forEach(card => {
     const categories = (card.dataset.category || '').split(' ');
-    const haystack = [card.querySelector('h3')?.textContent, card.querySelector('p')?.textContent, card.dataset.keywords].join(' ').toLowerCase();
-    const visible = (repoCategory === 'all' || categories.includes(repoCategory)) && (!query || haystack.includes(query));
-    card.hidden = !visible;
-    if(visible) count++;
+    const haystack = [
+      card.querySelector('h3')?.textContent,
+      card.querySelector('p')?.textContent,
+      card.dataset.keywords
+    ].join(' ').toLowerCase();
+    const shown = (repoCategory === 'all' || categories.includes(repoCategory))
+      && (!query || haystack.includes(query));
+    card.hidden = !shown;
+    if(shown)count++;
   });
-  if(repoResultCount) repoResultCount.textContent = `Showing ${count} of ${repoCards.length} projects`;
-  if(repoEmpty) repoEmpty.hidden = count !== 0;
+  if(repoResultCount)repoResultCount.textContent = 'Showing ' + count + ' of ' + repoCards.length + ' projects';
+  if(repoEmpty)repoEmpty.hidden = count !== 0;
+  renderRepoOrbit();
 }
 repoFilters.forEach(button => button.addEventListener('click', () => {
   repoCategory = button.dataset.filter;
@@ -114,10 +186,43 @@ repoFilters.forEach(button => button.addEventListener('click', () => {
 }));
 repoSearch?.addEventListener('input', filterRepos);
 document.getElementById('reset-repos')?.addEventListener('click', () => {
-  repoSearch.value = '';
+  if(repoSearch)repoSearch.value = '';
   repoFilters.find(filter => filter.dataset.filter === 'all')?.click();
-  repoSearch.focus();
+  repoSearch?.focus();
 });
+if(repoOrbitShell && repoCards.length === 5){
+  // Progressive enhancement: the original 5-card list remains usable without JavaScript.
+  repoOrbitShell.classList.add('is-orbit-ready');
+  if(repoOrbitHint)repoOrbitHint.hidden = false;
+  repoOrbitPrev?.addEventListener('click', () => rotateRepo(-1));
+  repoOrbitNext?.addEventListener('click', () => rotateRepo(1));
+  repoCards.forEach(card => {
+    card.querySelector('.repo-orbit-select')?.addEventListener('click', () => {
+      featuredRepo = card;
+      renderRepoOrbit();
+    });
+  });
+  repoOrbitStage?.addEventListener('keydown', event => {
+    if(event.key === 'ArrowRight' || event.key === 'ArrowLeft'){
+      event.preventDefault();
+      rotateRepo(event.key === 'ArrowRight' ? 1 : -1);
+    }
+  });
+  let touchOrigin = null;
+  repoOrbitStage?.addEventListener('touchstart', event => {
+    if(event.touches.length !== 1)return;
+    touchOrigin = {x:event.touches[0].clientX, y:event.touches[0].clientY};
+  }, {passive:true});
+  repoOrbitStage?.addEventListener('touchend', event => {
+    if(!touchOrigin || event.changedTouches.length !== 1)return;
+    const dx = event.changedTouches[0].clientX - touchOrigin.x;
+    const dy = event.changedTouches[0].clientY - touchOrigin.y;
+    touchOrigin = null;
+    if(Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4){
+      rotateRepo(dx < 0 ? 1 : -1);
+    }
+  }, {passive:true});
+}
 filterRepos();
 
 // Navigation keyboard behavior and active section indicators.
