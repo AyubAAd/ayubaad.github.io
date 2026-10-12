@@ -80,6 +80,9 @@
   const consoleEl=document.querySelector('.robot-console');
   const layout=document.querySelector('.robot-layout');
   const controls=document.getElementById('robot-2d-controls');
+  const controls3d=document.getElementById('robot-3d-controls');
+  const viewport2d=document.getElementById('robot-2d-viewport');
+  const viewport3d=document.getElementById('robot-3d-viewport');
   const description=document.getElementById('robot-view-description');
   const buttons=[...document.querySelectorAll('[data-robot-view]')];
   if(!consoleEl||!layout||!buttons.length)return;
@@ -88,10 +91,14 @@
     consoleEl.dataset.view=chosen;
     layout.dataset.robotMode=chosen;
     if(controls)controls.hidden=chosen!=='2d';
+    if(controls3d)controls3d.hidden=chosen!=='3d';
+    viewport2d?.setAttribute('aria-hidden',String(chosen!=='2d'));
+    viewport3d?.setAttribute('aria-hidden',String(chosen!=='3d'));
     if(description)description.textContent=chosen==='2d'
-      ? '2D mode is selected. Use the presets and manual joint controls below. Joint angles are illustrative, not physical limits.'
-      : '3D mode is selected. Use the chamber presets and joint controls in the chamber viewer. This is an educational illustration, not validated motion planning or a hardware controller.';
+      ? '2D mode selected. Choose a pose or adjust shoulder, elbow and wrist in the control panel beneath the viewer. Angles are illustrative, not mechanical limits.'
+      : '3D mode selected. Choose a pose, adjust the joints below the viewer, or rotate the camera. Both models are educational illustrations, not hardware controllers or validated motion plans.';
     buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.robotView===chosen)));
+    document.dispatchEvent(new CustomEvent('robot:view-change',{detail:{mode:chosen}}));
   }
   buttons.forEach(b=>b.addEventListener('click',()=>show(b.dataset.robotView)));
   document.querySelectorAll('.pose-button,[data-joint-control],#animate-button').forEach(el=>{
