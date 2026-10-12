@@ -23,10 +23,10 @@
   <script>try{document.documentElement.dataset.theme=localStorage.getItem('kailani-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}</script>
 <link rel="stylesheet" href="portfolio.css?v=20261011-14">
 <link rel="stylesheet" href="portfolio-upgrade.css?v=20261011-readability-pink2">
-<link rel="stylesheet" href="repo-orbit.css?v=20261011-orbit3">
+<link rel="stylesheet" href="repo-orbit.css?v=20261012-orbit-fix1">
 <link rel="stylesheet" href="robot-control-dock.css?v=20261011-dock1">
 <link rel="stylesheet" href="case-explorer.css?v=20261011-v1">
-  <script src="script.js?v=20261011-orbit4" defer></script>
+  <script src="script.js?v=20261012-orbit-fix1" defer></script>
   <script src="enhancements.js?v=20261011-pink2" defer></script>
   <script src="bookshelf.js?v=20261011-14" defer></script>
   <script src="ux.js" defer></script>
@@ -629,15 +629,39 @@
 </details>
 <p aria-live="polite" class="repo-result-count" id="repo-results" role="status">Showing 5 projects</p>
 <div class="repo-orbit-shell" id="repo-orbit-shell">
-  <div class="repo-cosmos" aria-hidden="true"><span class="repo-orbit-path"></span><span class="repo-sun"></span></div>
-  <div class="repo-grid" id="repo-grid" role="region" aria-roledescription="carousel" aria-label="Repository planets" tabindex="0">
+  <div class="repo-planetarium" id="repo-planetarium" role="group" aria-label="Five selectable repository planets" hidden>
+    <div class="repo-planetarium__stars" aria-hidden="true"></div>
+    <div class="repo-planetarium__track" aria-hidden="true"></div>
+    <div class="repo-planetarium__sun" aria-hidden="true"><span>GITHUB</span></div>
+    <button class="repo-planet" type="button" data-planet-select="leg" aria-label="Bring 3-Link Leg Simulation to the front" aria-pressed="true" data-slot="front">
+      <span class="repo-planet__sphere" aria-hidden="true"></span>
+      <span class="repo-planet__name" aria-hidden="true">Leg Sim</span>
+    </button>
+    <button class="repo-planet" type="button" data-planet-select="thermal" aria-label="Bring Thermal Logger to the front" aria-pressed="false" >
+      <span class="repo-planet__sphere" aria-hidden="true"></span>
+      <span class="repo-planet__name" aria-hidden="true">Thermal</span>
+    </button>
+    <button class="repo-planet" type="button" data-planet-select="prodriver" aria-label="Bring ProDriver Sim to the front" aria-pressed="false" >
+      <span class="repo-planet__sphere" aria-hidden="true"></span>
+      <span class="repo-planet__name" aria-hidden="true">ProDriver</span>
+    </button>
+    <button class="repo-planet" type="button" data-planet-select="huemotion" aria-label="Bring HueMotion to the front" aria-pressed="false" >
+      <span class="repo-planet__sphere" aria-hidden="true"></span>
+      <span class="repo-planet__name" aria-hidden="true">HueMotion</span>
+    </button>
+    <button class="repo-planet" type="button" data-planet-select="dmx" aria-label="Bring DMX Controller to the front" aria-pressed="false" >
+      <span class="repo-planet__sphere" aria-hidden="true"></span>
+      <span class="repo-planet__name" aria-hidden="true">DMX</span>
+    </button>
+  </div>
+  <div class="repo-grid" id="repo-grid" role="list" aria-label="Engineering repositories">
 <article class="repo-card" data-planet="leg" data-category="robotics" data-keywords="matlab simulink 3 link human leg simulation robotics kinematics dynamics jacobian newton euler control">
 <div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-purple">↗</span><span class="repo-category">Robotics &amp; controls</span></div>
 <h3 data-short="Leg Sim">3-Link Leg Simulation</h3><p>Three-link leg model exploring joint motion and torque in MATLAB/Simulink.</p>
 <div class="repo-meta"><span>MATLAB</span><span>Simulink</span><span>Kinematics</span></div>
 
 <a aria-label="View 3-Link Leg Simulation source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/3link-sim" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-<button type="button" class="repo-orbit-select" aria-label="Bring 3-Link Leg Simulation to the front" disabled hidden></button>
+
 </article>
 <article class="repo-card" data-planet="thermal" data-category="automation" data-keywords="thermal logger python tkinter pico tc08 arduino temperature data logging excel csv testing automation">
 <div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-pink">⌁</span><span class="repo-category">Tools &amp; automation</span></div>
@@ -645,7 +669,7 @@
 <div class="repo-meta"><span>Python</span><span>Tkinter</span><span>Arduino</span></div>
 
 <a aria-label="View Thermal Logger source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/Thermal-Logger" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-<button type="button" class="repo-orbit-select" aria-label="Bring Thermal Logger to the front" disabled hidden></button>
+
 </article>
 <article class="repo-card" data-planet="prodriver" data-category="automation lighting" data-keywords="prodriver sim python pyqt6 led driver fixture simulation electrical efficiency voltage current load">
 <div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-gold">◈</span><span class="repo-category">Engineering simulation</span></div>
@@ -653,7 +677,7 @@
 <div class="repo-meta"><span>Python</span><span>PyQt6</span><span>Simulation</span></div>
 
 <a aria-label="View ProDriver Sim source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/ProDriver-Sim" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-<button type="button" class="repo-orbit-select" aria-label="Bring ProDriver Sim to the front" disabled hidden></button>
+
 </article>
 <article class="repo-card" data-planet="huemotion" data-category="lighting" data-keywords="huemotion light gesture webcam hand tracking mediapipe node js casambi rgbw gesture recognition">
 <div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-blue">✳</span><span class="repo-category">Lighting &amp; interaction</span></div>
@@ -661,7 +685,7 @@
 <div class="repo-meta"><span>JavaScript</span><span>MediaPipe</span><span>Node.js</span></div>
 
 <a aria-label="View HueMotion source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/HueMotion" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-<button type="button" class="repo-orbit-select" aria-label="Bring HueMotion to the front" disabled hidden></button>
+
 </article>
 <article class="repo-card" data-planet="dmx" data-category="lighting automation" data-keywords="dmx controller flask python arduino serial rgbw lighting browser interface lighting control">
 <div class="repo-card-top"><span aria-hidden="true" class="repo-symbol repo-symbol-teal">◉</span><span class="repo-category">Lighting &amp; interaction</span></div>
@@ -669,15 +693,24 @@
 <div class="repo-meta"><span>Flask</span><span>Python</span><span>Arduino</span></div>
 
 <a aria-label="View DMX Controller source code on GitHub" class="repo-link" href="https://github.com/kalarcon775/DMX-Controller" rel="noopener noreferrer" target="_blank">View code on GitHub <span aria-hidden="true">↗</span></a>
-<button type="button" class="repo-orbit-select" aria-label="Bring DMX Controller to the front" disabled hidden></button>
+
 </article>
 </div>
-<div class="repo-orbit-controls" id="repo-orbit-controls" hidden>
-  <button class="repo-orbit-arrow" id="repo-orbit-prev" type="button" aria-label="Previous repository planet">←</button>
-  <div class="repo-orbit-readout" id="repo-orbit-readout" role="status" aria-live="polite" aria-atomic="true">1 / 5 <strong>3-Link Leg Simulation</strong></div>
-  <button class="repo-orbit-arrow" id="repo-orbit-next" type="button" aria-label="Next repository planet">→</button>
-</div>
-<p class="repo-orbit-hint" id="repo-orbit-hint" hidden>All five planets stay in view. Use the arrows, swipe, or select a planet to bring it forward.</p>
+  <div class="repo-featured" id="repo-featured" hidden aria-label="Selected repository">
+    <div class="repo-featured__copy">
+      <span class="repo-featured__eyebrow">IN FOCUS · <span id="repo-featured-count">1 / 5</span></span>
+      <h3 id="repo-featured-title">3-Link Leg Simulation</h3>
+      <p id="repo-featured-desc">Three-link leg model exploring joint motion and torque in MATLAB/Simulink.</p>
+      <div class="repo-featured__tags" id="repo-featured-tags"></div>
+    </div>
+    <a class="repo-featured__link" id="repo-featured-link" href="https://github.com/kalarcon775/3link-sim" rel="noopener noreferrer" target="_blank">View repository ↗</a>
+  </div>
+  <div class="repo-orbit-controls" id="repo-orbit-controls" hidden>
+    <button class="repo-orbit-arrow" id="repo-orbit-prev" type="button" aria-label="Previous repository planet">←</button>
+    <div class="repo-orbit-readout" id="repo-orbit-readout" role="status" aria-live="polite" aria-atomic="true">1 of 5 · 3-Link Leg Simulation</div>
+    <button class="repo-orbit-arrow" id="repo-orbit-next" type="button" aria-label="Next repository planet">→</button>
+  </div>
+  <p class="repo-orbit-hint" id="repo-orbit-hint" hidden>All five planets stay visible. Choose one, press an arrow, or swipe to rotate.</p>
 </div>
 <div class="repo-empty" hidden="" id="repo-empty"><p>No projects found. Try another keyword or category.</p><button class="btn btn-outline" id="reset-repos" type="button">Show all projects</button></div>
 <p class="repo-more">More from my GitHub: <a href="https://github.com/kalarcon775/Count-Screws" rel="noopener noreferrer" target="_blank">Count-Screws ↗</a> · <a href="https://github.com/kalarcon775?tab=repositories" rel="noopener noreferrer" target="_blank">Explore the full collection ↗</a>.</p>
