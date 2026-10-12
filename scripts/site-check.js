@@ -97,7 +97,7 @@ for(const width of [280,284,320,375,390,550,700,701,820,980]){
     {slot:'right',x:xSide,y:mobile?28:55},
     {slot:'back-right',x:xRear,y:mobile?-88:-96},
     {slot:'back-left',x:-xRear,y:mobile?-88:-96},
-    {slot:'left',x:-xSide,y:mobile?48:55}
+    {slot:'left',x:-xSide,y:mobile?28:55}
   ].map(p=>({...p,r:sizes[p.slot]/2}));
   const sun={x:0,y:mobile?65+32-stageHeight/2:52+52-stageHeight/2,r:mobile?32:52};
   planets.forEach((p,i)=>{
