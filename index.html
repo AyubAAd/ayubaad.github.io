@@ -251,15 +251,18 @@
           <div class="section-heading dossier-intro" data-ambient-reveal>
             <p class="eyebrow">02 / SELECTED TECHNICAL WORK</p>
             <h2 id="dossiers-title">Engineering <em>case studies.</em></h2>
-            <p>Three deeper reviews of engineering decisions, documented measurements, and verification status. Conceptual figures are labeled; source reports and restricted NASA results are not published.</p>
+            <p>Explore three engineering projects through a single interactive walkthrough. Select a project and a workflow stage, or open its dedicated page for methods, findings, and evidence limitations.</p>
           </div>
 
-          <section class="case-explorer" id="case-explorer" aria-labelledby="case-explorer-heading" hidden>
+          <section class="case-explorer" id="case-explorer" aria-labelledby="case-explorer-heading">
             <header class="case-explorer__header">
               <p class="case-explorer__eyebrow">INTERACTIVE / ENGINEERING PROCESS</p>
               <h3 id="case-explorer-heading">Step inside the engineering workflow</h3>
-              <p>Choose a case, then select a stage to see the engineering decision and the evidence behind it. The full case studies are preserved below.</p>
+              <p>Select NASA, IVerify, or the strain-gauge lab, then explore each stage. Use the links below to examine the complete project and its evidence.</p>
             </header>
+            <span class="case-explorer__legacy-anchor" id="case-nasa" aria-hidden="true"></span>
+              <span class="case-explorer__legacy-anchor" id="case-iverify" aria-hidden="true"></span>
+              <span class="case-explorer__legacy-anchor" id="case-controls" aria-hidden="true"></span>
             <div class="case-explorer__tabs" role="tablist" aria-label="Choose an engineering case study">
               <button type="button" role="tab" id="case-explorer-tab-nasa" aria-controls="case-explorer-panel" aria-selected="true" data-case-select="nasa">NASA robotic arm</button>
               <button type="button" role="tab" id="case-explorer-tab-iverify" aria-controls="case-explorer-panel" aria-selected="false" tabindex="-1" data-case-select="iverify">IVerify prototype</button>
@@ -306,192 +309,13 @@
                 <button type="button" id="case-explorer-next" aria-label="Next workflow stage">Next →</button>
               </div>
               <div class="case-explorer__links">
-                <a id="case-explorer-details" href="#case-nasa">See supporting evidence ↓</a>
+                <a id="case-explorer-details" href="projects/nasa.html#project-evidence">Examine evidence ↗</a>
                 <a id="case-explorer-full" href="projects/nasa.html">Full project page ↗</a>
               </div>
             </footer>
           </section>
 
-          <article class="technical-dossier nasa-dossier" id="case-nasa" aria-labelledby="case-nasa-title" data-ambient-reveal>
-            <header class="dossier-head">
-              <div><p class="dossier-id">CASE 01 / SYSTEMS ENGINEERING · NASA MARSHALL</p><h4 id="case-nasa-title">Robot control, thermal analysis, and verification</h4></div>
-              <span class="dossier-status">Engineering assessment</span>
-            </header>
-            <p class="dossier-summary">Could a legacy robotic arm support lunar-dust mitigation tests inside a constrained high-vacuum chamber? I used ROS2 for arm control and calibration and Thermal Desktop for both steady-state and transient thermal analysis of the arm in high vacuum as part of that same NASA project, alongside workspace analysis, actuator constraints, and verification planning.</p>
-            <div class="dossier-role"><strong>My contribution</strong><p>I used ROS2 to control and calibrate the arm and Thermal Desktop for both steady-state and transient analysis, while contributing to workspace and requirements evaluation.</p></div>
-            <div class="dossier-body">
-              <div class="dossier-notes">
-                <h5>Engineering approach</h5>
-                <ul>
-                  <li>Evaluate workspace and reach against target surfaces, chamber boundaries, and joint constraints.</li>
-                  <li>Review actuation and environmental constraints alongside planned operational scenarios.</li>
-                  <li>Identify evidence still needed before accepting the arm for high-vacuum testing.</li>
-                </ul>
-                <h5>What the record supports</h5>
-                <p>An assessment structured around <strong>34 system requirements</strong> and <strong>six planned test scenarios</strong>, with a <strong>10⁻⁷ torr target</strong> as an operating constraint. These figures describe evaluation scope, not six completed qualification tests.</p>
-              </div>
-              <figure class="dossier-figure dossier-system-figure">
-                <figcaption>FIG. A · Integrated NASA robotic-arm engineering activities (conceptual)</figcaption>
-                <div class="nasa-system-architecture">
-                  <div class="nasa-arch-stage nasa-arch-input">
-                    <span class="nasa-arch-label">01 / SYSTEM INPUTS</span>
-                    <strong>Robotic-arm assessment</strong>
-                    <p>Chamber geometry, lunar-dust test surfaces, actuator limits, and high-vacuum constraints</p>
-                  </div>
-                  <div class="nasa-arch-branches" aria-label="Two related NASA engineering workstreams">
-                    <div class="nasa-arch-branch">
-                      <span class="nasa-arch-label">02A / CONTROL &amp; CALIBRATION</span>
-                      <strong>ROS2</strong>
-                      <p>Robotic-arm control and calibration</p>
-                    </div>
-                    <div class="nasa-arch-branch">
-                      <span class="nasa-arch-label">02B / THERMAL MODELING</span>
-                      <strong>Thermal Desktop</strong>
-                      <p>Steady-state and transient thermal analysis of the arm in high vacuum</p>
-                    </div>
-                  </div>
-                  <div class="nasa-arch-stage nasa-arch-output">
-                    <span class="nasa-arch-label">03 / SYSTEMS EVALUATION</span>
-                    <strong>Requirements &amp; verification planning</strong>
-                    <p>Workspace and environmental constraints reviewed against 34 requirements and six planned scenarios</p>
-                  </div>
-                </div>
-                <p class="figure-foot">Illustrative relationship between workstreams, not a software-interface specification, validated thermal result, or claim of direct ROS2/Thermal Desktop integration.</p>
-              </figure>
-            </div>
-            <div class="dossier-verification">
-              <h5>Verification and evidence status</h5>
-              <div class="verification-scroll" role="region" aria-label="NASA engineering evidence table" tabindex="0">
-                <table class="verification-table">
-                  <caption>Assessment activities and the evidence available for public description</caption>
-                  <thead><tr><th scope="col">Activity</th><th scope="col">Engineering method</th><th scope="col">Status and limitations</th></tr></thead>
-                  <tbody>
-                    <tr><th scope="row">Arm control and calibration</th><td>ROS2 control and calibration work</td><td>Performed; quantitative calibration error not disclosed</td></tr>
-                    <tr><th scope="row">High-vacuum thermal behavior</th><td>Thermal Desktop steady-state and transient analyses</td><td>Modeled; no public temperature results or qualified thermal margins</td></tr>
-                    <tr><th scope="row">Requirements assessment</th><td>Workspace, actuator, and environmental constraints reviewed</td><td>34 system requirements in assessment scope; individual verification statuses not published</td></tr>
-                    <tr><th scope="row">Operational scenarios</th><td>Requirements-linked verification plan</td><td>Six scenarios planned, not reported as completed qualification tests</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <footer class="dossier-footer">
-              <p><strong>Boundary:</strong> Control/calibration and thermal modeling work formed part of this assessment, not evidence of vacuum qualification, validated thermal margins, deployment, or six completed scenarios.</p>
-              <span class="dossier-footer-links"><a href="#bookshelf" data-open-feature-book="nasa">Open the NASA project book <span aria-hidden="true">↗</span></a><a href="#robot-lab">Try the illustrative robot lab <span aria-hidden="true">↗</span></a></span>
-            <a class="dossier-detail-link" href="projects/nasa.html">Read complete project details ↗</a>
-            </footer>
-          </article>
-
-          <article class="technical-dossier" id="case-iverify" aria-labelledby="case-iverify-title" data-ambient-reveal>
-            <header class="dossier-head">
-              <div><p class="dossier-id">CASE 02 / SENIOR CAPSTONE · SYSTEMS INTEGRATION</p><h4 id="case-iverify-title">IVerify: from tubing force to a state indication</h4></div>
-              <span class="dossier-status">Bench-level proof of concept</span>
-            </header>
-            <p class="dossier-summary">As project lead and systems integrator on a four-person team, I coordinated an external, clip-on concept intended to flag potential downstream restrictions in gravity-fed IV tubing without contacting the sterile fluid path.</p>
-            <div class="dossier-role"><strong>My contribution</strong><p>Project lead and systems integrator on a four-person senior-design team; coordinated subsystem integration, documentation, and system-level direction.</p></div>
-            <div class="dossier-body">
-              <div class="dossier-notes">
-                <h5>System architecture</h5>
-                <p>A clamp applies controlled preload. Tubing reaction force becomes a sensor signal, which is conditioned and compared with thresholds. The microcontroller supervises timing and controls the indication.</p>
-                <h5>Reported prototype observations</h5>
-                <ul>
-                  <li>Clamp preload averaged about <strong>5.0 N</strong>, within approximately <strong>±10%</strong> of the target in repeated bench trials.</li>
-                  <li>Sensor output changed as test conditions changed; comparator thresholds and firmware-driven <strong>two-LED</strong> states were exercised.</li>
-                  <li>Selected tubing showed no visible puncture, leakage, or permanent collapse in the reported tests.</li>
-                </ul>
-              </div>
-              <figure class="dossier-figure">
-                <figcaption>FIG. B · Prototype signal chain (functional schematic)</figcaption>
-                <ol class="dossier-chain" aria-label="Tubing and clamp, force sensor, analog threshold, microcontroller, prototype LEDs">
-                  <li><span class="chain-index">MECH</span><strong>Preloaded tubing</strong><small>External force response</small></li>
-                  <li><span class="chain-index">SENSE</span><strong>Force sensor</strong><small>Electrical response</small></li>
-                  <li><span class="chain-index">ANALOG</span><strong>Filter + compare</strong><small>Threshold events</small></li>
-                  <li><span class="chain-index">LOGIC</span><strong>MCU + two LEDs</strong><small>Prototype state output</small></li>
-                </ol>
-                <p class="figure-foot">Functional schematic based on the capstone final report; not a circuit diagram or clinical instrument.</p>
-              </figure>
-            </div>
-            <div class="dossier-evidence" aria-label="Selected IVerify verification evidence">
-              <div><span>Preload</span><strong>≈5.0 N</strong><small>Reported average, bench trials</small></div>
-              <div><span>Variation</span><strong>≈±10%</strong><small>Relative to target preload</small></div>
-              <div><span>Indication</span><strong>2 LEDs</strong><small>Demonstrated prototype, not final UI</small></div>
-            </div>
-            <div class="dossier-verification">
-              <h5>Prototype verification snapshot</h5>
-              <div class="verification-scroll" role="region" aria-label="IVerify prototype verification table" tabindex="0">
-                <table class="verification-table">
-                  <caption>Preliminary bench-level findings from the Spring 2026 capstone report</caption>
-                  <thead><tr><th scope="col">Requirement</th><th scope="col">Method</th><th scope="col">Reported finding</th></tr></thead>
-                  <tbody>
-                    <tr><th scope="row">Repeatable clamp preload</th><td>Repeated clamp-force trials</td><td>Approximately 5.0 N average, within about ±10% of target; reported pass</td></tr>
-                    <tr><th scope="row">Threshold and indication response</th><td>Comparator and MCU state tests</td><td>Threshold changes and two-LED output demonstrated on the bench</td></tr>
-                    <tr><th scope="row">Tubing integrity</th><td>Post-test visual inspection</td><td>No visible puncture, leakage, or permanent collapse reported</td></tr>
-                    <tr><th scope="row">Clinical detection reliability</th><td>Repeated flow and false-alarm characterization</td><td>Not clinically validated; quantitative performance testing remains</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <footer class="dossier-footer">
-              <p><strong>Boundary:</strong> A student prototype, not a clinically validated or approved medical device. Quantified flow sensitivity, false-alarm rates, and repeatable detection-time distributions still need testing. Three-color indication was a design goal, not implemented in the reported prototype.</p>
-              <a href="#bookshelf" data-open-feature-book="iverify">Open the IVerify project book <span aria-hidden="true">↗</span></a>
-            <a class="dossier-detail-link" href="projects/iverify.html#iverify-reconstruction">Explore the reconstructed CAD ↗</a> <a class="dossier-detail-link" href="projects/iverify.html">Full project details ↗</a>
-            </footer>
-          </article>
-
-          <article class="technical-dossier" id="case-controls" aria-labelledby="case-controls-title" data-ambient-reveal>
-            <header class="dossier-head">
-              <div><p class="dossier-id">CASE 03 / EE370L · INSTRUMENTATION LAB</p><h4 id="case-controls-title">Strain-gauge calibration and vibration response</h4></div>
-              <span class="dossier-status">Recorded bench observations</span>
-            </header>
-            <p class="dossier-summary">In partner-based lab work, we calibrated a strain-gauge amplifier and observed the response of a metal strip under mechanical excitation. Signal quality mattered as much as obtaining a number.</p>
-            <div class="dossier-role"><strong>My contribution</strong><p>Worked with a lab partner on instrument setup, strain-gauge amplifier calibration, and oscilloscope-based vibration measurements.</p></div>
-            <div class="dossier-body">
-              <div class="dossier-notes">
-                <h5>Measurement method</h5>
-                <ul>
-                  <li>Set up a half-bridge strain gauge and calibrated the signal-conditioning indicator before measurement.</li>
-                  <li>Compare loaded and unloaded readings, then observe a mechanically excited waveform on an oscilloscope.</li>
-                  <li>Discard the first noisy trace for interpretation and use the cleaner strummed trace reported in the lab.</li>
-                </ul>
-                <h5>Instrumentation</h5>
-                <p>Strain-gauge half-bridge, Validyne CD12 transducer indicator, Keysight MSOX3000 oscilloscope, and Keithley 2110 multimeter.</p>
-              </div>
-              <figure class="dossier-figure">
-                <figcaption>FIG. C · Measurement chain (conceptual)</figcaption>
-                <ol class="dossier-chain" aria-label="Strained beam, half-bridge, transducer indicator, oscilloscope">
-                  <li><span class="chain-index">INPUT</span><strong>Beam deflection</strong><small>Applied mechanical load</small></li>
-                  <li><span class="chain-index">SENSOR</span><strong>Strain half-bridge</strong><small>Small resistance change</small></li>
-                  <li><span class="chain-index">SIGNAL</span><strong>Amplifier</strong><small>Balance and calibration</small></li>
-                  <li><span class="chain-index">READOUT</span><strong>Oscilloscope</strong><small>Waveform and decay</small></li>
-                </ol>
-                <p class="figure-foot">Conceptual wiring and measurement order, not a plotted time-series or a reproduced circuit schematic.</p>
-              </figure>
-            </div>
-            <div class="dossier-evidence" aria-label="Selected cleaner waveform measurements from the strain-gauge lab">
-              <div><span>Observed frequency</span><strong>49.256 Hz</strong><small>Selected strummed trace</small></div>
-              <div><span>Peak output</span><strong>610 mV</strong><small>Selected waveform</small></div>
-              <div><span>Reported decay</span><strong>6.335 ms</strong><small>Time constant in lab report</small></div>
-            </div>
-            <div class="dossier-verification">
-              <h5>Measurement and evidence status</h5>
-              <div class="verification-scroll" role="region" aria-label="Instrumentation lab measurement evidence table" tabindex="0">
-                <table class="verification-table">
-                  <caption>Reported measurements from the March 2025 EE370L partner lab</caption>
-                  <thead><tr><th scope="col">Measurement</th><th scope="col">Method</th><th scope="col">Evidence and limitations</th></tr></thead>
-                  <tbody>
-                    <tr><th scope="row">Strain-signal preparation</th><td>Half-bridge amplifier balance and calibration</td><td>Calibration procedure documented; uncertainty not reported</td></tr>
-                    <tr><th scope="row">Excited beam response</th><td>Oscilloscope recording of a strummed strip</td><td>Selected clean trace: 49.256 Hz, 610 mV peak, 6.335 ms reported decay</td></tr>
-                    <tr><th scope="row">Repeatability</th><td>Comparison across attempted traces</td><td>Some traces were noisy; no averaged uncertainty statistics available</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <footer class="dossier-footer">
-              <p><strong>Boundary:</strong> Values come from the selected cleaner trace in the March 2025 lab report, not an average across trials or a certified sensor characterization. Other attempted traces were less reliable.</p>
-              <a href="#bookshelf" data-open-feature-book="controls">Open the control lab project book <span aria-hidden="true">↗</span></a>
-            <a class="dossier-detail-link" href="projects/controls.html">Read complete project details ↗</a>
-            </footer>
-          </article>
-          <p class="dossier-source-note">Evidence basis: portfolio NASA assessment, IVerify Spring 2026 final report, and EE370L Lab 7 (March 2025). Source reports and raw experimental files are not published on this site.</p>
+          <p class="dossier-source-note">Project figures and evidence summaries reflect the available assessment, capstone, and lab records. Complete methods and limitations are presented on each linked project page.</p>
         </div>
     </section>
 
