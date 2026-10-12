@@ -99,6 +99,13 @@ for(const file of caseStudyFiles){
   }
   check(!/<h2>Evidence and limitations<\/h2>/.test(html),
     file+' includes repeated evidence-limitations card');
+  for(const title of ['Challenge','Approach','Tools']){
+    check(html.includes('<h3>'+title+'</h3>'),
+      file+' missing readable '+title+' subsection heading');
+  }
+  check((html.match(/<h1\\b/g)||[]).length===1,
+    file+' must contain exactly one page heading');
+
 }
 for(const group of ['robotics','embedded','measurement','software']){
   check(directory.includes('data-gallery-group="'+group+'"'),
