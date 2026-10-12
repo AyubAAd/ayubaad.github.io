@@ -88,6 +88,12 @@
   transition:none;
   touch-action:manipulation;
 }
+/* Animate only after the initial five positions have been painted. */
+.repo-orbit-shell.is-orbit-animated .repo-planet{
+  transition:transform .68s cubic-bezier(.2,.7,.21,1),
+    width .68s cubic-bezier(.2,.7,.21,1),
+    height .68s cubic-bezier(.2,.7,.21,1);
+}
 .repo-planet__sphere{
   position:absolute;inset:0;
   display:block;
