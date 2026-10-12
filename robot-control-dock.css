@@ -1,0 +1,353 @@
+/* One shared control layout for both robot views.
+   Load after the portfolio styles so 2D and 3D have matching controls. */
+.robot-section .robot-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:stretch;
+  gap:24px;
+  width:min(100% - 36px,1060px);
+  margin-inline:auto;
+}
+.robot-section .robot-copy{
+  width:100%;
+  max-width:890px;
+}
+.robot-section .robot-copy p:not(.eyebrow){max-width:78ch}
+.robot-section .robot-copy h2{margin-bottom:12px}
+.robot-section .robot-copy #robot-view-description{
+  max-width:830px;
+  margin:12px 0 0;
+  font-size:13px;
+  line-height:1.7;
+}
+.robot-section .robot-console{
+  width:min(100%,930px);
+  max-width:930px;
+  margin-inline:auto;
+  border:1px solid #72506f;
+  border-radius:18px;
+  background:#201c2b;
+  overflow:hidden;
+  box-shadow:0 19px 46px rgba(35,22,43,.2);
+}
+.robot-section .robot-console .console-header{
+  padding:14px clamp(14px,2.6vw,25px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  background:#2f2539;
+  border-bottom:1px solid #74536e;
+}
+.robot-section .robot-console .console-title{
+  color:#fff1fa;
+  font-size:12px;
+  letter-spacing:.095em;
+  font-weight:800;
+}
+.robot-section .robot-console .console-tag{color:#edc5dd}
+.robot-section .robot-view-picker{
+  margin-left:auto;
+  display:flex;
+  width:auto;
+  justify-content:flex-end;
+  gap:7px;
+}
+.robot-section .robot-view-picker button{
+  min-width:102px;
+  min-height:43px;
+  padding:10px 17px;
+  border-radius:999px;
+  border:1px solid #927495;
+  color:#f9eefa;
+  background:#49364e;
+  font-size:13px;
+  font-weight:750;
+}
+.robot-section .robot-view-picker button[aria-pressed="true"]{
+  background:#eaa3c7;
+  color:#2a1830;
+  border-color:#f3b5d3;
+}
+.robot-section .robot-view-picker button:focus-visible{
+  outline:3px solid #ffe0f0;
+  outline-offset:3px;
+}
+.robot-section .robot-viewport{
+  position:relative;
+  width:100%;
+  aspect-ratio:600/460;
+  overflow:hidden;
+  background:radial-gradient(ellipse at 49% 37%,#354150,#1d2333 66%,#171927 100%);
+}
+.robot-section .robot-2d-viewport,
+.robot-section .robot-3d-canvas-wrap{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border-radius:0;
+  overflow:hidden;
+}
+.robot-section .robot-2d-viewport svg{
+  display:block;
+  width:100%;
+  height:100%;
+  max-height:none;
+  background:transparent;
+}
+.robot-section .robot-3d-canvas{
+  display:block;
+  width:100%;
+  height:100%;
+  aspect-ratio:auto;
+  border:0;
+  touch-action:pan-y;
+}
+.robot-section .robot-3d-caption{
+  bottom:13px;
+  left:15px;
+  right:15px;
+  font-size:12px;
+  color:#f4e7f4;
+}
+.robot-section .robot-console[data-view="2d"] .robot-3d-canvas-wrap,
+.robot-section .robot-console[data-view="3d"] .robot-2d-viewport{
+  display:none!important;
+}
+.robot-section .robot-console[data-view="2d"] .robot-2d-viewport,
+.robot-section .robot-console[data-view="3d"] .robot-3d-canvas-wrap{
+  display:block;
+}
+.robot-section .robot-controls-dock{
+  background:linear-gradient(155deg,#2c2337,#231e2e);
+  border-top:1px solid #73536f;
+}
+.robot-section .robot-mode-controls{
+  min-width:0;
+  padding:clamp(16px,2.5vw,26px);
+  color:#f7eff8;
+}
+.robot-section .robot-mode-controls[hidden]{display:none!important}
+.robot-section .robot-control-heading{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px 16px;
+  margin-bottom:12px;
+}
+.robot-section .robot-control-heading--joints{
+  margin-top:23px;
+  padding-top:20px;
+  border-top:1px solid #71556e;
+}
+.robot-section .robot-control-kicker{
+  font:800 10px/1.5 var(--sans);
+  letter-spacing:.12em;
+  color:#f0aad2;
+  margin:0 0 5px;
+}
+.robot-section .robot-control-heading h3,
+.robot-section .robot-control-heading h4{
+  font:750 clamp(18px,2.15vw,22px)/1.35 var(--sans);
+  color:#fff0fa;
+  margin:0;
+  letter-spacing:-.01em;
+}
+.robot-section .robot-control-count{
+  font:600 12px/1.5 var(--sans);
+  color:#ebd2e8;
+  white-space:normal;
+}
+.robot-section .robot-control-presets{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:stretch;
+  gap:9px;
+  margin:0;
+  padding:0;
+}
+.robot-section .robot-control-presets button{
+  appearance:none;
+  min-height:43px;
+  padding:10px 17px;
+  border:1px solid #a177a0;
+  border-radius:10px;
+  background:#49364e;
+  color:#fff2fa;
+  font:750 13px/1.35 var(--sans);
+  cursor:pointer;
+  transition:background-color .15s ease,border-color .15s ease;
+}
+.robot-section .robot-control-presets button:is(:hover,:focus-visible){
+  color:#fff;
+  background:#744a70;
+  border-color:#efb3d4;
+}
+.robot-section .robot-control-presets button[aria-pressed="true"],
+.robot-section .robot-control-presets .pose-button.active{
+  background:#eaa3c7;
+  color:#2d1c32;
+  border-color:#f2b9d8;
+}
+.robot-section .robot-control-presets button:focus-visible,
+.robot-section .robot-control-utilities button:focus-visible,
+.robot-section .robot-3d-canvas:focus-visible{
+  outline:3px solid #ffe1ef;
+  outline-offset:3px;
+}
+.robot-section .robot-control-sliders{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start;
+  gap:11px 14px;
+  padding:0;
+  margin:0;
+  max-width:none;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  border-radius:0;
+}
+.robot-section .robot-control-sliders .joint-row,
+.robot-section .robot-control-sliders .robot-3d-control{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:6px 10px;
+  align-items:center;
+  min-width:0;
+  margin:0;
+  padding:12px 13px 8px;
+  border-radius:11px;
+  border:1px solid #825c81;
+  background:#382b43;
+  color:#fff2fa;
+  min-height:94px;
+}
+.robot-section .robot-control-sliders :is(.joint-row,.robot-3d-control) label{
+  font:700 13px/1.5 var(--sans);
+  color:#fff3fb;
+  min-width:0;
+  overflow-wrap:break-word;
+}
+.robot-section .robot-control-sliders :is(.joint-row,.robot-3d-control) output{
+  min-width:57px;
+  padding:4px 8px;
+  text-align:center;
+  background:#86365f;
+  border:1px solid #bc7aa3;
+  border-radius:7px;
+  color:#fff9fd;
+  font:750 12px/1.45 var(--sans);
+  font-variant-numeric:tabular-nums;
+}
+.robot-section .robot-control-sliders :is(.joint-row,.robot-3d-control) input[type="range"]{
+  grid-column:1/-1;
+  width:100%;
+  margin:4px 0 0;
+  --range-active:#e477aa;
+  --range-inactive:#826985;
+}
+.robot-section .robot-control-utilities{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px 20px;
+  margin:18px 0 0;
+  padding:14px 0 0;
+  border-top:1px solid #71556e;
+}
+.robot-section .robot-control-secondary,
+.robot-section .robot-control-camera{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  align-items:center;
+  padding:0;
+  margin:0;
+}
+.robot-section .robot-control-utility-label{
+  display:block;
+  color:#eec4dc;
+  font:800 10px/1.5 var(--sans);
+  letter-spacing:.09em;
+  margin-bottom:7px;
+}
+.robot-section .robot-control-utilities button{
+  border:1px solid #b57caa;
+  border-radius:999px;
+  background:#57364f;
+  color:#fff1fa;
+  font:750 12px/1.35 var(--sans);
+  min-height:41px;
+  padding:9px 15px;
+}
+.robot-section .robot-control-utilities button:is(:hover,:focus-visible){
+  background:#88436c;
+  color:#fff;
+}
+.robot-section .robot-control-reset{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:0;
+}
+.robot-section .robot-control-reset p{
+  margin:0;
+  color:#e5ccdf;
+  font-size:11px;
+}
+.robot-section .robot-control-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:17px 0 0;
+  padding:13px 0 0;
+  border-top:1px solid #71556e;
+  color:#f6eaf5;
+  font-size:12px;
+  letter-spacing:0;
+}
+.robot-section .robot-control-footer .telemetry{display:flex;gap:14px;flex-wrap:wrap}
+.robot-section .robot-control-footer b{
+  color:#fff;
+  font-variant-numeric:tabular-nums;
+}
+.robot-section .robot-control-footer .robot-3d-status{
+  margin:0;
+  font-size:12px;
+  line-height:1.6;
+}
+.robot-section .robot-mode-controls .robot-3d-help{
+  max-width:82ch;
+  font-size:12px;
+  line-height:1.7;
+  margin:11px 0 0;
+  color:#ebd8e8;
+}
+/* Mode changes never move the controls to a different column. */
+@media(max-width:720px){
+  .robot-section .robot-control-sliders{grid-template-columns:minmax(0,1fr)}
+  .robot-section .robot-viewport{aspect-ratio:6/5}
+  .robot-section .robot-console .console-header{gap:9px}
+}
+@media(max-width:490px){
+  .robot-section .robot-layout{width:calc(100% - 24px);gap:17px}
+  .robot-section .robot-view-picker{width:100%;justify-content:stretch}
+  .robot-section .robot-view-picker button{flex:1}
+  .robot-section .robot-viewport{aspect-ratio:1/1}
+  .robot-section .robot-control-presets button{flex:1 1 calc(50% - 9px);min-width:0}
+  .robot-section .robot-mode-controls{padding:15px 13px}
+  .robot-section .robot-3d-caption{font-size:10px}
+  .robot-section .robot-control-count{font-size:11px}
+  .robot-section .robot-control-utilities button{flex:1}
+}
+@media(prefers-reduced-motion:reduce){
+  .robot-section .robot-control-presets button{transition:none!important}
+}
