@@ -24,13 +24,15 @@
 <link rel="stylesheet" href="portfolio.css?v=20261011-14">
 <link rel="stylesheet" href="portfolio-upgrade.css?v=20261011-readability-pink2">
 <link rel="stylesheet" href="repo-orbit.css?v=20261011-orbit3">
+<link rel="stylesheet" href="case-explorer.css?v=20261011-v1">
   <script src="script.js?v=20261011-orbit4" defer></script>
   <script src="enhancements.js?v=20261011-pink2" defer></script>
   <script src="bookshelf.js?v=20261011-14" defer></script>
   <script src="ux.js" defer></script>
   <script src="ambient.js?v=20261011-2" defer></script>
 <meta property="og:image:alt" content="Kailani at NASA Marshall Space Flight Center"><meta name="twitter:image" content="https://kailania.vercel.app/assets/sls-rocket-kailani.jpeg">
-<script src="portfolio-upgrade.js?v=20261011-readability" defer></script><script src="robot-3d.js?v=20261011-pink2" defer></script>
+<script src="portfolio-upgrade.js?v=20261011-readability" defer></script>
+<script src="case-explorer.js?v=20261011-v1" defer></script><script src="robot-3d.js?v=20261011-pink2" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Kailani Alarcon","url":"https://kailania.vercel.app/","jobTitle":"Electrical engineering graduate student","alumniOf":{"@type":"CollegeOrUniversity","name":"University of Nevada, Reno"},"knowsAbout":["Robotics","Embedded systems","Electrical engineering","Engineering verification"],"sameAs":["https://github.com/kalarcon775","https://www.linkedin.com/in/kailani-alarcon/"]}</script>
 </head>
 <body>
@@ -250,6 +252,64 @@
             <h2 id="dossiers-title">Engineering <em>case studies.</em></h2>
             <p>Three deeper reviews of engineering decisions, documented measurements, and verification status. Conceptual figures are labeled; source reports and restricted NASA results are not published.</p>
           </div>
+
+          <section class="case-explorer" id="case-explorer" aria-labelledby="case-explorer-heading" hidden>
+            <header class="case-explorer__header">
+              <p class="case-explorer__eyebrow">INTERACTIVE / ENGINEERING PROCESS</p>
+              <h3 id="case-explorer-heading">Step inside the engineering workflow</h3>
+              <p>Choose a case, then select a stage to see the engineering decision and the evidence behind it. The full case studies are preserved below.</p>
+            </header>
+            <div class="case-explorer__tabs" role="tablist" aria-label="Choose an engineering case study">
+              <button type="button" role="tab" id="case-explorer-tab-nasa" aria-controls="case-explorer-panel" aria-selected="true" data-case-select="nasa">NASA robotic arm</button>
+              <button type="button" role="tab" id="case-explorer-tab-iverify" aria-controls="case-explorer-panel" aria-selected="false" tabindex="-1" data-case-select="iverify">IVerify prototype</button>
+              <button type="button" role="tab" id="case-explorer-tab-controls" aria-controls="case-explorer-panel" aria-selected="false" tabindex="-1" data-case-select="controls">Strain-gauge lab</button>
+            </div>
+            <div class="case-explorer__panel" role="tabpanel" id="case-explorer-panel" aria-labelledby="case-explorer-tab-nasa" tabindex="0">
+              <div class="case-explorer__headline">
+                <div>
+                  <h4 id="case-explorer-title">A robotic arm operating under vacuum constraints</h4>
+                  <p id="case-explorer-summary">Follow the constraint review, two engineering workstreams, and verification planning. These stages describe the project work, not a completed vacuum qualification.</p>
+                </div>
+                <span class="case-explorer__status" id="case-explorer-status">Engineering assessment</span>
+              </div>
+              <div class="case-explorer__workflow">
+                <p class="case-explorer__workflow-label">SELECT A STAGE IN THE SIGNAL / DECISION PATH</p>
+                <div class="case-explorer__flow" role="group" aria-label="Four stages of the selected engineering project">
+                  <button type="button" aria-pressed="true" data-case-step="0"><span class="case-explorer__flow-num" aria-hidden="true">01</span><strong>Constraints</strong><small>Geometry + environment</small></button>
+                  <button type="button" aria-pressed="false" data-case-step="1"><span class="case-explorer__flow-num" aria-hidden="true">02</span><strong>Arm control</strong><small>ROS2 + calibration</small></button>
+                  <button type="button" aria-pressed="false" data-case-step="2"><span class="case-explorer__flow-num" aria-hidden="true">03</span><strong>Thermal model</strong><small>Thermal Desktop</small></button>
+                  <button type="button" aria-pressed="false" data-case-step="3"><span class="case-explorer__flow-num" aria-hidden="true">04</span><strong>Verification</strong><small>Requirements + scenarios</small></button>
+                </div>
+              </div>
+              <div class="case-explorer__readout">
+                <div class="case-explorer__insight" aria-live="polite" aria-atomic="true">
+                  <span class="case-explorer__insight-label">ENGINEERING DECISION</span>
+                  <h5 id="case-explorer-step-title">Define the workspace and environmental constraints</h5>
+                  <p id="case-explorer-step-text">Review test surfaces, reachable workspace, joint and actuator limits, and the high-vacuum environment before selecting a control or thermal model.</p>
+                </div>
+                <aside class="case-explorer__limit">
+                  <strong>WHAT THIS DOES NOT PROVE</strong>
+                  <p id="case-explorer-limit-text">The assessment specifies a 10⁻⁷ torr vacuum target. This is an operating requirement, not evidence of qualified operation.</p>
+                </aside>
+              </div>
+              <div class="case-explorer__stats" aria-label="Evidence snapshot for the selected project">
+                <div data-case-metric><strong>34</strong><span>requirements in scope</span></div>
+                <div data-case-metric><strong>6</strong><span>planned scenarios</span></div>
+                <div data-case-metric><strong>10⁻⁷ torr</strong><span>vacuum target</span></div>
+              </div>
+            </div>
+            <footer class="case-explorer__footer">
+              <div class="case-explorer__actions">
+                <button type="button" id="case-explorer-prev" aria-label="Previous workflow stage">← Previous</button>
+                <span class="case-explorer__counter" id="case-explorer-counter" aria-label="Current stage">1 / 4</span>
+                <button type="button" id="case-explorer-next" aria-label="Next workflow stage">Next →</button>
+              </div>
+              <div class="case-explorer__links">
+                <a id="case-explorer-details" href="#case-nasa">See supporting evidence ↓</a>
+                <a id="case-explorer-full" href="projects/nasa.html">Full project page ↗</a>
+              </div>
+            </footer>
+          </section>
 
           <article class="technical-dossier nasa-dossier" id="case-nasa" aria-labelledby="case-nasa-title" data-ambient-reveal>
             <header class="dossier-head">
