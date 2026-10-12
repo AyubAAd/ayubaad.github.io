@@ -258,6 +258,16 @@ function updateBackTop(){backTop?.classList.toggle('is-visible',window.scrollY>7
 window.addEventListener('scroll',updateBackTop,{passive:true});
 updateBackTop();
 
+// Make every on-page "Top" link reliably return to scroll position zero,
+// including the floating control, footer link and site logo.
+document.querySelectorAll('a[href="#top"]').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:0,left:0,behavior:motionReduced?'auto':'smooth'});
+  });
+});
+
 // Sequence cancellation works for pointer or keyboard use.
 const stopButton=document.getElementById('stop-button');
 if(stopButton){
