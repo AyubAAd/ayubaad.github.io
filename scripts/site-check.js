@@ -53,6 +53,16 @@ check(home.includes('id="repo-planetarium"')&&home.includes('repo-orbit.css'),
   'Solar-system stage and stylesheet required');
 check(home.includes('<details class="repo-demos"'),
   'Video demos should remain collapsible');
+
+const demoFigures=[...home.matchAll(/<figure class="video-demo"[^>]*>/g)].map(match=>match[0]);
+check(demoFigures.length===2 && demoFigures.every(tag=>!/\shidden\b/.test(tag)),
+  'Available demo video cards must not depend on metadata events to become visible');
+check(['assets/huemotion-demo.mp4','assets/lighting-demo.mp4'].every(filename=>
+  fs.existsSync(path.join(root,filename))),
+  'Both displayed demonstration videos must exist');
+check(!repoJs.includes("addEventListener('loadedmetadata'"),
+  'Repository videos must remain visible before metadata loading');
+
 check(repoJs.includes('function renderRepoOrbit()')&&repoJs.includes('function rotateRepo(direction)') &&
   repoJs.includes('function planetSlotStyle('),
   'Carousel must have stable positioning and navigation logic');
