@@ -136,7 +136,7 @@ function planetSlotStyle(slot, width){
     };
     return {
       front:[0,80,sizes.front],
-      right:[xSide,48,sizes.right],
+      right:[xSide,28,sizes.right],
       left:[-xSide,48,sizes.left],
       'back-right':[xRear,-88,sizes['back-right']],
       'back-left':[-xRear,-88,sizes['back-left']]
