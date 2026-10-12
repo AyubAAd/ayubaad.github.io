@@ -351,12 +351,6 @@ if(stopButton){
   poseButtons.forEach(b=>b.addEventListener('click',()=>{stopButton.hidden=true;}));
 }
 
-// Show the optional video clips only after their user-uploaded MP4 files exist.
-// This prevents broken video players while the assets folder is being populated.
-document.querySelectorAll('[data-video-demo]').forEach(card => {
-  const video = card.querySelector('video');
-  if (!video) return;
-  video.addEventListener('loadedmetadata', () => { card.hidden = false; }, { once: true });
-  video.addEventListener('error', () => { card.hidden = true; });
-  video.load();
-});
+// Demonstration media is present in the repository. The native <details>
+// disclosure shows the clips immediately, even before metadata is loaded.
+// Video playback remains user-initiated.
