@@ -158,7 +158,39 @@ for(const file of htmlFiles){
     check(getIds(target).has(fragment),file+' references missing section '+url);
   }
 }
-check(home.includes('id="robot-2d-controls" hidden'),'2D panel should start hidden while 3D view is selected');
+check(home.includes('id="robot-2d-controls" aria-label="2D motion controls" hidden'),
+  '2D panel should start hidden while 3D view is selected');
+
+/* The 2D/3D robot simulator shares one dock beneath one viewer. */
+const robotDockCss=fs.readFileSync(path.join(root,'robot-control-dock.css'),'utf8');
+const robotViewJs=fs.readFileSync(path.join(root,'portfolio-upgrade.js'),'utf8');
+const robot3dJs=fs.readFileSync(path.join(root,'robot-3d.js'),'utf8');
+const robotSection=home.slice(home.indexOf('<section class="section robot-section"'),
+  home.indexOf('<section class="section experience-section"'));
+const dock=robotSection.indexOf('class="robot-controls-dock"');
+check(home.includes('robot-control-dock.css'),
+  'Robot mode design should load the shared controls stylesheet');
+check(dock>robotSection.indexOf('class="robot-viewport"')&&
+  robotSection.indexOf('id="robot-2d-controls" aria-label="2D motion controls" hidden')>dock&&
+  robotSection.indexOf('id="robot-3d-controls" aria-label="3D chamber controls"')>dock,
+  'Both robot control panels must be inside the same dock, below the viewer');
+check((robotSection.match(/data-joint-control/g)||[]).length===3 &&
+  (robotSection.match(/class="robot-3d-control"/g)||[]).length===6,
+  'Retain three planar and six chamber joint controls');
+check((robotSection.match(/class="robot-control-heading robot-control-heading--joints"/g)||[]).length===2 &&
+  robotSection.includes('class="robot-action-row robot-control-presets"') &&
+  robotSection.includes('class="robot-3d-tools robot-control-presets"'),
+  'Both modes need matching preset and manual adjustment headings');
+check(robotViewJs.includes("controls3d.hidden=chosen!=='3d'")&&
+  robotViewJs.includes("controls.hidden=chosen!=='2d'")&&
+  robotViewJs.includes("robot:view-change"),
+  'Robot mode switching must update both panels and the active viewer');
+check(robot3dJs.includes("robot:view-change")&&robot3dJs.includes("fit()"),
+  '3D canvas must resize correctly when reactivated');
+check(robotDockCss.includes('robot-control-sliders')&&
+  robotDockCss.includes('robot-control-presets'),
+  'Both panels need shared styling');
+
 check(home.includes('data-robot-mode="3d"'),'3D view should start as the selected robot mode');
 
 
