@@ -135,7 +135,7 @@ function planetSlotStyle(slot, width){
       'back-left':Math.min(70,Math.max(56,width*.18))
     };
     return {
-      front:[0,97,sizes.front],
+      front:[0,80,sizes.front],
       right:[xSide,48,sizes.right],
       left:[-xSide,48,sizes.left],
       'back-right':[xRear,-88,sizes['back-right']],
