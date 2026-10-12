@@ -190,5 +190,9 @@
   });
   if('ResizeObserver'in window)new ResizeObserver(fit).observe(canvas);
   else window.addEventListener('resize',fit,{passive:true});
+  // Refit after a hidden 3D viewport becomes visible again in the shared dock.
+  document.addEventListener('robot:view-change',event=>{
+    if(event.detail?.mode==='3d')fit();
+  });
   sync();fit();
 })();
