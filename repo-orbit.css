@@ -85,7 +85,7 @@
   appearance:none;
   cursor:pointer;
   transform:translate(-50%,-50%) translate(var(--x),var(--y));
-  transition:transform .68s cubic-bezier(.2,.7,.21,1),width .68s cubic-bezier(.2,.7,.21,1),height .68s cubic-bezier(.2,.7,.21,1);
+  transition:none;
   touch-action:manipulation;
 }
 .repo-planet__sphere{
