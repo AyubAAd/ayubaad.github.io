@@ -93,6 +93,34 @@ check(repoJs.includes('renderRepoOrbit();')&&repoJs.includes('function filterRep
 check(orbitCss.includes('prefers-reduced-motion:reduce'),
   'The orbital carousel should respect reduced-motion preferences');
 
+
+/* Interactive engineering-case-study explorer: linked to the existing dossiers. */
+const caseExplorerJS=fs.readFileSync(path.join(root,'case-explorer.js'),'utf8');
+const caseExplorerCSS=fs.readFileSync(path.join(root,'case-explorer.css'),'utf8');
+check(home.includes('id="case-explorer"') &&
+  home.includes('case-explorer.css') && home.includes('case-explorer.js'),
+  'Engineering case studies need their interactive explorer and assets');
+check((home.match(/data-case-select="/g)||[]).length===3,
+  'Case explorer must offer NASA, IVerify and instrumentation views');
+check((home.match(/data-case-step="/g)||[]).length===4,
+  'Each interactive case workflow needs four selectable stages');
+check(['case-nasa','case-iverify','case-controls'].every(id=>home.includes('id="'+id+'"')),
+  'All three original long-form case studies must remain accessible');
+check(home.indexOf('id="case-explorer"') < home.indexOf('id="case-nasa"'),
+  'Interactive explorer should introduce the longer case studies');
+check(caseExplorerJS.includes("const caseData = {") &&
+  ['nasa','iverify','controls'].every(key=>caseExplorerJS.includes(key+': {')),
+  'Interactive case explorer source-derived case content missing');
+check(caseExplorerJS.includes("setAttribute('aria-selected'") &&
+  caseExplorerJS.includes("setAttribute('aria-pressed'"),
+  'Interactive case controls must expose their selected state');
+check(caseExplorerCSS.includes('prefers-reduced-motion:reduce'),
+  'Case explorer must respect reduced-motion settings');
+let explorerSyntaxValid=true;
+try{new (require('node:vm').Script)(caseExplorerJS,{filename:'case-explorer.js'})}
+catch(error){explorerSyntaxValid=false;console.error(error.message)}
+check(explorerSyntaxValid,'Case explorer JavaScript must parse');
+
 check(home.includes('id="robot-3d-canvas"'),'3D viewer missing');
 check(home.includes('id="theme-toggle"'),'Theme toggle missing');
 check(home.includes('data-robot-view="3d"'),'Robot view picker missing');
