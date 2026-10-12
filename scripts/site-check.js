@@ -38,61 +38,71 @@ for(const file of htmlFiles){
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const directory=fs.readFileSync(path.join(projectDir,'index.html'),'utf8');
 
-// Repository planets stay discoverable via arrows, keyboard, filtering and fallback cards.
+// Five repository planets remain visible, separated, and independently selectable.
 const orbitCss=fs.readFileSync(path.join(root,'repo-orbit.css'),'utf8');
 const repoJs=fs.readFileSync(path.join(root,'script.js'),'utf8');
-check((home.match(/data-planet="/g)||[]).length===5,'Expected five repository planets');
-check((home.match(/class="repo-orbit-select"/g)||[]).length===5,'Planet selection buttons missing');
+check((home.match(/class="repo-planet"/g)||[]).length===5,
+  'Five distinct repository planet buttons required');
+check((home.match(/class="repo-card"/g)||[]).length===5,
+  'All five original source cards must remain as a no-JS fallback');
+check(home.includes('id="repo-featured"') && home.includes('id="repo-featured-link"'),
+  'The featured project detail panel and its link must be present');
 check(home.includes('id="repo-orbit-prev"')&&home.includes('id="repo-orbit-next"'),
-  'Previous and next orbital carousel controls required');
-check(home.includes('repo-orbit.css'),'Orbital styles missing');
-check(home.includes('aria-roledescription="carousel"'),'Carousel region needs descriptive semantics');
-check(home.includes('<details class="repo-demos"'),'Video demos should start collapsed');
-check(repoJs.includes('function renderRepoOrbit()')&&repoJs.includes('function rotateRepo(direction)'),
-  'Repository orbit navigation code missing');
-
-check(repoJs.includes('function paintRepoOrbit()') &&
-  repoJs.includes('function animateRepoOrbit()') &&
-  repoJs.includes('Math.sin(angle)') && repoJs.includes('Math.cos(angle)'),
-  'Orbit must animate every planet along a curved depth-aware path');
-check(repoJs.includes('orbitReducedMotion.matches'),
-  'Animation must respect reduced-motion preferences');
+  'Previous and next orbital controls required');
+check(home.includes('id="repo-planetarium"')&&home.includes('repo-orbit.css'),
+  'Solar-system stage and stylesheet required');
+check(home.includes('<details class="repo-demos"'),
+  'Video demos should remain collapsible');
+check(repoJs.includes('function renderRepoOrbit()')&&repoJs.includes('function rotateRepo(direction)') &&
+  repoJs.includes('function planetSlotStyle('),
+  'Carousel must have stable positioning and navigation logic');
+check(repoJs.includes('repoPlanetarium')===false && repoJs.includes("const repoOrbitStage"),
+  'Ensure carousel uses the same stage reference throughout');
+check(repoJs.includes("repoPlanets.forEach(planet=>planet.addEventListener('click'") &&
+  repoJs.includes("function filterRepos()"),
+  'Planet selection and search filtering must remain functional');
+check(repoJs.includes("repoOrbitStage.addEventListener('keydown'") &&
+  repoJs.includes("repoOrbitStage.addEventListener('touchend'"),
+  'Carousel must support keyboard and touch input');
+check(orbitCss.includes('prefers-reduced-motion:reduce') &&
+  orbitCss.includes('.repo-planet{') &&
+  orbitCss.includes('.repo-featured{'),
+  'Planets must move with accessible, reduced-motion-aware styles');
 let repositoryScriptParses=true;
-try{
-  new (require('node:vm').Script)(repoJs,{filename:'script.js'});
-}catch(error){
-  repositoryScriptParses=false;
-  console.error(error.message);
+try{new (require('node:vm').Script)(repoJs,{filename:'script.js'})}
+catch(error){repositoryScriptParses=false;console.error(error.message)}
+check(repositoryScriptParses,'Repository JavaScript must parse');
+// Validate the visible planet positions against actual stage dimensions.
+// Do not merely check bounding boxes: earlier planets overlapped each other/the sun.
+for(const width of [280,284,320,375,390,550,700,701,820,980]){
+  const mobile=width<=700;
+  const stageHeight=mobile?368:430;
+  const xSide=Math.min(335,width*(mobile?0.295:0.345));
+  const xRear=Math.min(205,width*(mobile?0.235:0.215));
+  const sizes=mobile?{
+    front:Math.min(142,Math.max(108,width*.38)),
+    right:Math.min(86,Math.max(66,width*.23)),
+    left:Math.min(86,Math.max(66,width*.23)),
+    'back-right':Math.min(70,Math.max(56,width*.18)),
+    'back-left':Math.min(70,Math.max(56,width*.18))
+  }:{front:154,right:108,left:108,'back-right':92,'back-left':92};
+  const planets=[
+    {slot:'front',x:0,y:mobile?97:106},
+    {slot:'right',x:xSide,y:mobile?48:55},
+    {slot:'back-right',x:xRear,y:mobile?-88:-96},
+    {slot:'back-left',x:-xRear,y:mobile?-88:-96},
+    {slot:'left',x:-xSide,y:mobile?48:55}
+  ].map(p=>({...p,r:sizes[p.slot]/2}));
+  const sun={x:0,y:mobile?65+32-stageHeight/2:52+52-stageHeight/2,r:mobile?32:52};
+  planets.forEach((p,i)=>{
+    check(Math.abs(p.x)+p.r<=width/2&&Math.abs(p.y)+p.r<=stageHeight/2,
+      p.slot+' clipped at width '+width);
+    check(Math.hypot(p.x-sun.x,p.y-sun.y)>=p.r+sun.r+5,
+      p.slot+' overlaps sun at width '+width);
+    planets.slice(i+1).forEach(q=>check(Math.hypot(p.x-q.x,p.y-q.y)>=p.r+q.r+5,
+      p.slot+' overlaps '+q.slot+' at width '+width));
+  });
 }
-check(repositoryScriptParses,'Repository carousel JavaScript must parse');
-for(const width of [320,390,550,820,980]){
-  const mobile=width<=550;
-  const planetDiameter=mobile?260:330;
-  const height=mobile?470:535;
-  const radius=Math.min(335,width*(mobile?0.315:0.345));
-  for(let i=0;i<5;i++){
-    const theta=Math.PI*2*i/5;
-    const sine=Math.sin(theta),cosine=Math.cos(theta);
-    const proximity=(1+cosine)/2;
-    const x=radius*sine;
-    const y=105*cosine-30*Math.abs(sine);
-    const scale=mobile?0.32+0.60*Math.pow(proximity,3):0.48+0.47*Math.pow(proximity,2);
-    const radiusOnScreen=planetDiameter*scale/2;
-    check(Math.abs(x)+radiusOnScreen<=width/2+0.01 &&
-      Math.abs(y)+radiusOnScreen<=height/2+0.01,
-      'Planet '+(i+1)+' clipped at viewport width '+width);
-  }
-}
-
-check(repoJs.includes('repoOrbitStage?.addEventListener(\'keydown\''),
-  'Keyboard arrow navigation missing');
-check(repoJs.includes('repoOrbitStage?.addEventListener(\'touchend\''),
-  'Swipe navigation missing');
-check(repoJs.includes('renderRepoOrbit();')&&repoJs.includes('function filterRepos()'),
-  'Filtering must refresh the orbit');
-check(orbitCss.includes('prefers-reduced-motion:reduce'),
-  'The orbital carousel should respect reduced-motion preferences');
-
 
 /* Interactive engineering-case-study explorer: linked to the existing dossiers. */
 const caseExplorerJS=fs.readFileSync(path.join(root,'case-explorer.js'),'utf8');
