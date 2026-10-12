@@ -98,6 +98,7 @@ const repoOrbitPrev = document.getElementById('repo-orbit-prev');
 const repoOrbitNext = document.getElementById('repo-orbit-next');
 let repoCategory = 'all';
 let featuredRepo = repoCards[0] || null;
+const orbitReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const orbitLayouts = {
   1: ['front'],
   2: ['front', 'right'],
@@ -105,8 +106,42 @@ const orbitLayouts = {
   4: ['front', 'right', 'back', 'left'],
   5: ['front', 'right', 'back-right', 'back-left', 'left']
 };
+let orbitPhase = 0;
+let orbitTargetPhase = 0;
+let orbitFrame = 0;
+const orbitCycle = 2 * Math.PI;
+
 function visibleRepos(){
   return repoCards.filter(card => !card.hidden);
+}
+
+// Paint positions along an ellipse. Sine moves planets left/right while cosine
+// moves them forward/back; scale and stacking order convey the changing depth.
+// All five planets remain on-screen, including the two behind the orbit.
+function paintRepoOrbit(){
+  if(!repoOrbitShell || !repoOrbitStage || !repoCards.length)return;
+  const available = visibleRepos();
+  const count = available.length;
+  if(!count)return;
+  const width = repoOrbitStage.clientWidth || 980;
+  const mobile = width <= 550;
+  const radiusX = Math.min(335, width * (mobile ? 0.325 : 0.345));
+  available.forEach((card, index) => {
+    const angle = orbitCycle * index / count - orbitPhase;
+    const sine = Math.sin(angle);
+    const cosine = Math.cos(angle);
+    const proximity = (1 + cosine) / 2;
+    const x = radiusX * sine;
+    const y = 105 * cosine - 30 * Math.abs(sine);
+    const scale = mobile
+      ? 0.32 + 0.60 * Math.pow(proximity, 3)
+      : 0.48 + 0.47 * Math.pow(proximity, 2);
+    card.style.setProperty('--x', x.toFixed(1) + 'px');
+    card.style.setProperty('--y', y.toFixed(1) + 'px');
+    card.style.setProperty('--scale', scale.toFixed(3));
+    card.style.zIndex = String(Math.round(2 + 6 * proximity));
+    card.style.opacity = (0.78 + 0.22 * proximity).toFixed(3);
+  });
 }
 function renderRepoOrbit(){
   if(!repoOrbitShell || !repoOrbitStage || !repoCards.length)return;
@@ -120,11 +155,10 @@ function renderRepoOrbit(){
   const activeIndex = available.indexOf(featuredRepo);
   const positions = orbitLayouts[available.length] || orbitLayouts[5];
   repoCards.forEach(card => {
-    const present = available.includes(card);
-    const offset = present
-      ? (available.indexOf(card) - activeIndex + available.length) % available.length
-      : -1;
-    const position = offset < 0 ? 'hidden' : positions[offset];
+    const offset = available.indexOf(card);
+    const present = offset !== -1;
+    const step = present ? (offset - activeIndex + available.length) % available.length : -1;
+    const position = step === -1 ? 'hidden' : positions[step];
     const isFront = position === 'front';
     card.dataset.orbitPosition = position;
     card.setAttribute('aria-current', isFront ? 'true' : 'false');
@@ -148,13 +182,62 @@ function renderRepoOrbit(){
     name.textContent = featuredRepo.querySelector('h3')?.textContent || 'Repository';
     repoOrbitReadout.appendChild(name);
   }
+  paintRepoOrbit();
+}
+function animateRepoOrbit(){
+  if(orbitFrame)cancelAnimationFrame(orbitFrame);
+  orbitFrame = 0;
+  if(orbitReducedMotion.matches || !repoOrbitShell){
+    orbitPhase = orbitTargetPhase;
+    repoOrbitShell?.classList.remove('is-orbit-animating');
+    paintRepoOrbit();
+    return;
+  }
+  const initialPhase = orbitPhase;
+  const distance = orbitTargetPhase - initialPhase;
+  const duration = Math.min(1220, 780 + 165 * Math.abs(distance) / (orbitCycle / Math.max(1, visibleRepos().length)));
+  const started = performance.now();
+  repoOrbitShell.classList.add('is-orbit-animating');
+  function frame(now){
+    const progress = Math.min(1, (now - started) / duration);
+    const eased = (1 - Math.cos(Math.PI * progress)) / 2;
+    orbitPhase = initialPhase + distance * eased;
+    paintRepoOrbit();
+    if(progress < 1){
+      orbitFrame = requestAnimationFrame(frame);
+    }else{
+      orbitFrame = 0;
+      orbitPhase = orbitTargetPhase;
+      repoOrbitShell.classList.remove('is-orbit-animating');
+      paintRepoOrbit();
+    }
+  }
+  orbitFrame = requestAnimationFrame(frame);
 }
 function rotateRepo(direction){
   const available = visibleRepos();
   if(available.length < 2)return;
   const activeIndex = Math.max(0, available.indexOf(featuredRepo));
   featuredRepo = available[(activeIndex + direction + available.length) % available.length];
+  orbitTargetPhase += direction * orbitCycle / available.length;
   renderRepoOrbit();
+  animateRepoOrbit();
+}
+function selectRepoPlanet(card){
+  const available = visibleRepos();
+  const index = available.indexOf(card);
+  if(index < 0 || card === featuredRepo)return;
+  const desiredAngle = orbitCycle * index / available.length;
+  // Shortest arc keeps the selected planet visibly on its way to the front.
+  const delta = Math.atan2(
+    Math.sin(desiredAngle - orbitTargetPhase),
+    Math.cos(desiredAngle - orbitTargetPhase)
+  );
+  featuredRepo = card;
+  orbitTargetPhase += delta;
+  renderRepoOrbit();
+  animateRepoOrbit();
+  card.querySelector('.repo-link')?.focus({preventScroll:true});
 }
 function filterRepos(){
   const query = (repoSearch?.value || '').trim().toLowerCase();
@@ -173,6 +256,14 @@ function filterRepos(){
   });
   if(repoResultCount)repoResultCount.textContent = 'Showing ' + count + ' of ' + repoCards.length + ' projects';
   if(repoEmpty)repoEmpty.hidden = count !== 0;
+  if(orbitFrame)cancelAnimationFrame(orbitFrame);
+  orbitFrame = 0;
+  repoOrbitShell?.classList.remove('is-orbit-animating');
+  const available = visibleRepos();
+  if(available.length){
+    if(!available.includes(featuredRepo))featuredRepo = available[0];
+    orbitPhase = orbitTargetPhase = orbitCycle * available.indexOf(featuredRepo) / available.length;
+  }
   renderRepoOrbit();
 }
 repoFilters.forEach(button => button.addEventListener('click', () => {
@@ -191,19 +282,13 @@ document.getElementById('reset-repos')?.addEventListener('click', () => {
   repoSearch?.focus();
 });
 if(repoOrbitShell && repoCards.length === 5){
-  // Progressive enhancement: the original 5-card list remains usable without JavaScript.
+  // Without JavaScript the original five repository cards remain readable.
   repoOrbitShell.classList.add('is-orbit-ready');
   if(repoOrbitHint)repoOrbitHint.hidden = false;
   repoOrbitPrev?.addEventListener('click', () => rotateRepo(-1));
   repoOrbitNext?.addEventListener('click', () => rotateRepo(1));
   repoCards.forEach(card => {
-    card.querySelector('.repo-orbit-select')?.addEventListener('click', () => {
-      featuredRepo = card;
-      renderRepoOrbit();
-      // The planet selection button disappears when its card becomes active:
-      // put keyboard focus on the newly available project link.
-      card.querySelector('.repo-link')?.focus({preventScroll:true});
-    });
+    card.querySelector('.repo-orbit-select')?.addEventListener('click', () => selectRepoPlanet(card));
   });
   repoOrbitStage?.addEventListener('keydown', event => {
     if(event.key === 'ArrowRight' || event.key === 'ArrowLeft'){
@@ -225,6 +310,7 @@ if(repoOrbitShell && repoCards.length === 5){
       rotateRepo(dx < 0 ? 1 : -1);
     }
   }, {passive:true});
+  window.addEventListener('resize', paintRepoOrbit, {passive:true});
 }
 filterRepos();
 
