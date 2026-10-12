@@ -68,6 +68,12 @@ check(orbitCss.includes('prefers-reduced-motion:reduce') &&
   orbitCss.includes('.repo-planet{') &&
   orbitCss.includes('.repo-featured{'),
   'Planets must move with accessible, reduced-motion-aware styles');
+
+check(orbitCss.includes('transition:none;') &&
+  orbitCss.includes('.repo-orbit-shell.is-orbit-animated .repo-planet') &&
+  repoJs.includes("repoOrbitShell.classList.add('is-orbit-animated')"),
+  'Planets must not animate from a shared center during initial load');
+
 let repositoryScriptParses=true;
 try{new (require('node:vm').Script)(repoJs,{filename:'script.js'})}
 catch(error){repositoryScriptParses=false;console.error(error.message)}
@@ -97,6 +103,8 @@ for(const width of [280,284,320,375,390,550,700,701,820,980]){
   planets.forEach((p,i)=>{
     check(Math.abs(p.x)+p.r<=width/2&&Math.abs(p.y)+p.r<=stageHeight/2,
       p.slot+' clipped at width '+width);
+    check(p.slot!=='front'||p.y+p.r+24 <= stageHeight/2,
+      'Featured planet label clipped at width '+width);
     check(Math.hypot(p.x-sun.x,p.y-sun.y)>=p.r+sun.r+5,
       p.slot+' overlaps sun at width '+width);
     planets.slice(i+1).forEach(q=>check(Math.hypot(p.x-q.x,p.y-q.y)>=p.r+q.r+5,
