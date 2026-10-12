@@ -311,3 +311,12 @@
   .repo-orbit-shell.is-orbit-ready .repo-card,
   .repo-orbit-controls .repo-orbit-arrow{transition:none!important}
 }
+
+
+/* Keep the whole portfolio stop shorter than the former grid-and-video stack. */
+.github-section{padding-block:clamp(48px,5vw,72px)}
+.repo-orbit-shell.is-orbit-ready .repo-grid:focus-visible{
+  outline:2px solid #edb9d6;
+  outline-offset:-4px;
+  border-radius:24px;
+}
