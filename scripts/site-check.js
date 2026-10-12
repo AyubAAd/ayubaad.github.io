@@ -103,7 +103,7 @@ for(const file of caseStudyFiles){
     check(html.includes('<h3>'+title+'</h3>'),
       file+' missing readable '+title+' subsection heading');
   }
-  check((html.match(/<h1\\b/g)||[]).length===1,
+  check((html.match(/<h1\b/g)||[]).length===1,
     file+' must contain exactly one page heading');
 
 }
