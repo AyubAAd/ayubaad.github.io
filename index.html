@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="portfolio.css?v=20261011-14">
 <link rel="stylesheet" href="portfolio-upgrade.css?v=20261011-readability-pink2">
 <link rel="stylesheet" href="repo-orbit.css?v=20261011-orbit3">
+<link rel="stylesheet" href="robot-control-dock.css?v=20261011-dock1">
 <link rel="stylesheet" href="case-explorer.css?v=20261011-v1">
   <script src="script.js?v=20261011-orbit4" defer></script>
   <script src="enhancements.js?v=20261011-pink2" defer></script>
@@ -31,8 +32,8 @@
   <script src="ux.js" defer></script>
   <script src="ambient.js?v=20261011-2" defer></script>
 <meta property="og:image:alt" content="Kailani at NASA Marshall Space Flight Center"><meta name="twitter:image" content="https://kailania.vercel.app/assets/sls-rocket-kailani.jpeg">
-<script src="portfolio-upgrade.js?v=20261011-readability" defer></script>
-<script src="case-explorer.js?v=20261011-v1" defer></script><script src="robot-3d.js?v=20261011-pink2" defer></script>
+<script src="portfolio-upgrade.js?v=20261011-dock1" defer></script>
+<script src="case-explorer.js?v=20261011-v1" defer></script><script src="robot-3d.js?v=20261011-dock1" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Kailani Alarcon","url":"https://kailania.vercel.app/","jobTitle":"Electrical engineering graduate student","alumniOf":{"@type":"CollegeOrUniversity","name":"University of Nevada, Reno"},"knowsAbout":["Robotics","Embedded systems","Electrical engineering","Engineering verification"],"sameAs":["https://github.com/kalarcon775","https://www.linkedin.com/in/kailani-alarcon/"]}</script>
 </head>
 <body>
@@ -718,24 +719,21 @@
         <div class="robot-copy" data-ambient-reveal>
           <p class="eyebrow">05 / KINEMATICS STUDY</p>
           <h2>Interactive <em>robot motion.</em></h2>
-          <p>Explore a ceiling-mounted robotic arm in an illustrative 3D chamber, or switch to the simplified 2D motion study.</p>
-          <p class="robot-aside" id="robot-view-description">3D mode is selected. Use the presets and joint controls in the chamber viewer. This is an educational illustration, not validated motion planning or a hardware controller.</p>
-          <div class="robot-2d-controls" id="robot-2d-controls" hidden>
-          <div class="robot-action-row"><button aria-pressed="true" class="pose-button active" data-pose="home" type="button">Home</button><button aria-pressed="false" class="pose-button" data-pose="hello" type="button">Say hello</button><button aria-pressed="false" class="pose-button" data-pose="reach" type="button">Reach</button><button aria-pressed="false" class="pose-button" data-pose="inspect" type="button">Inspect</button></div>
-          <div class="sequence-wrap"><button type="button" id="animate-button" class="sequence-button">Run motion sequence ↗</button><button type="button" id="stop-button" class="sequence-stop" hidden>Stop sequence</button></div>
-<div class="robot-tuner" aria-label="Manual joint controls">
-<h3>Explore the 2D joint model</h3>
-<p class="tuner-hint">Move a slider to adjust the 2D model, or choose a preset above. These angles are illustrative, not physical joint limits.</p>
-<div class="joint-row"><label for="joint-shoulder">Shoulder angle</label><output id="shoulder-input-value" for="joint-shoulder">-48°</output><input id="joint-shoulder" data-joint-control type="range" min="-90" max="90" step="1" value="-48" aria-describedby="shoulder-input-value"></div>
-<div class="joint-row"><label for="joint-elbow">Elbow angle</label><output id="elbow-input-value" for="joint-elbow">96°</output><input id="joint-elbow" data-joint-control type="range" min="-120" max="135" step="1" value="96" aria-describedby="elbow-input-value"></div>
-<div class="joint-row"><label for="joint-wrist">Wrist angle</label><output id="wrist-input-value" for="joint-wrist">0°</output><input id="joint-wrist" data-joint-control type="range" min="-90" max="90" step="1" value="0" aria-describedby="wrist-input-value"></div>
-<div class="tuner-bottom"><p>Angles are illustrative, not mechanical joint limits.</p><button class="tuner-reset" type="button" id="reset-robot">Reset to home</button></div>
-</div>
-          </div>
+          <p>Switch between a simplified 2D motion study and a 3D chamber view. Both modes use the same control area, with presets above manual joint adjustments.</p>
+          <p class="robot-aside" id="robot-view-description">3D mode selected. Choose a pose, adjust the joints below the viewer, or rotate the camera. Both models are educational illustrations, not hardware controllers or validated motion plans.</p>
         </div>
         <div class="robot-console" data-view="3d">
-          <div class="console-header"><span class="console-title"><span class="live-pip"></span> KAILANI'S ROBOT LAB</span><span class="console-tag">EDUCATIONAL DEMOS</span><div class="robot-view-picker" role="group" aria-label="Choose robot visualization"><button type="button" data-robot-view="2d" aria-pressed="false" aria-controls="robot-2d-controls arm-svg">2D view</button><button type="button" data-robot-view="3d" aria-pressed="true" aria-controls="robot-3d-canvas">3D view</button></div></div>
-          <svg aria-label="Animated side view of a robotic arm hanging from the ceiling of a test chamber" id="arm-svg" role="img" viewbox="0 0 500 430">
+          <div class="console-header">
+            <span class="console-title"><span class="live-pip"></span> KAILANI'S ROBOT LAB</span>
+            <span class="console-tag">EDUCATIONAL SIMULATIONS</span>
+            <div class="robot-view-picker" role="group" aria-label="Choose robot visualization">
+              <button type="button" data-robot-view="2d" aria-pressed="false" aria-controls="robot-2d-controls robot-2d-viewport">2D view</button>
+              <button type="button" data-robot-view="3d" aria-pressed="true" aria-controls="robot-3d-controls robot-3d-viewport">3D view</button>
+            </div>
+          </div>
+          <div class="robot-viewport" aria-label="Robot visualization">
+            <div class="robot-2d-viewport" id="robot-2d-viewport" aria-hidden="true">
+              <svg aria-label="Animated side view of a robotic arm hanging from the ceiling of a test chamber" id="arm-svg" role="img" viewbox="0 0 500 430">
 <defs><pattern height="25" id="simGrid" patternunits="userSpaceOnUse" width="25"><path d="M25 0H0V25" fill="none" opacity=".3" stroke="#74526c" stroke-width=".8"></path></pattern><lineargradient id="armGradient" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffc9dd"></stop><stop offset="1" stop-color="#e48ab8"></stop></lineargradient></defs>
 <rect fill="url(#simGrid)" height="430" width="500" x="0" y="0"></rect>
 <rect fill="#36283c" fill-opacity=".36" height="322" rx="9" stroke="#ac89a6" stroke-dasharray="6 6" stroke-width="1.5" width="328" x="86" y="65"></rect>
@@ -748,25 +746,50 @@
 <circle cx="300" cy="335" fill="#ff9ec4" id="tip-glow" opacity=".12" r="15"></circle><circle cx="300" cy="335" fill="#ffeef5" id="tip-dot" r="4"></circle>
 <g fill="#edc5d8" opacity=".8"><path d="M124 101v-10m-5 5h10M380 144v-10m-5 5h10M133 347v-10m-5 5h10" stroke="#edc5d8" stroke-width="1.4"></path></g>
 </svg>
-<details class="robot-3d-details" open>
-            <summary>Chamber view and joint settings</summary>
-            <div class="robot-3d-body">
-              <div class="robot-3d-canvas-wrap">
+            </div>
+            <div class="robot-3d-canvas-wrap" id="robot-3d-viewport">
                 <canvas id="robot-3d-canvas" class="robot-3d-canvas" width="600" height="460" role="img" tabindex="0" aria-label="Interactive 3D illustration of the robotic arm in a 36 inch cubical chamber. Use arrow keys or drag to rotate the view."></canvas>
                 <div class="robot-3d-caption" aria-hidden="true">36 × 36 × 36 in · ceiling mounted · illustrative geometry</div>
               </div>
-              <div class="robot-3d-tools" role="group" aria-label="3D robot pose presets">
+          </div>
+          <div class="robot-controls-dock" id="robot-controls-dock">
+            <section class="robot-mode-controls robot-2d-controls" id="robot-2d-controls" aria-label="2D motion controls" hidden>
+              <div class="robot-control-heading">
+                <div><p class="robot-control-kicker">2D MOTION STUDY</p><h3>Choose a pose</h3></div>
+                <span class="robot-control-count">3 joints · planar view</span>
+              </div>
+              <div class="robot-action-row robot-control-presets" role="group" aria-label="2D motion presets"><button aria-pressed="true" class="pose-button active" data-pose="home" type="button">Home</button><button aria-pressed="false" class="pose-button" data-pose="hello" type="button">Say hello</button><button aria-pressed="false" class="pose-button" data-pose="reach" type="button">Reach</button><button aria-pressed="false" class="pose-button" data-pose="inspect" type="button">Inspect</button></div>
+              <div class="robot-control-heading robot-control-heading--joints">
+                <div><p class="robot-control-kicker">MANUAL POSITIONING</p><h4>Adjust joint angles</h4></div>
+                <span class="robot-control-count">Illustrative ranges</span>
+              </div>
+              <div class="robot-control-sliders robot-tuner" role="group" aria-label="2D manual joint angles">
+                <div class="joint-row"><label for="joint-shoulder">Shoulder angle</label><output id="shoulder-input-value" for="joint-shoulder">-48°</output><input id="joint-shoulder" data-joint-control type="range" min="-90" max="90" step="1" value="-48" aria-describedby="shoulder-input-value"></div>
+                <div class="joint-row"><label for="joint-elbow">Elbow angle</label><output id="elbow-input-value" for="joint-elbow">96°</output><input id="joint-elbow" data-joint-control type="range" min="-120" max="135" step="1" value="96" aria-describedby="elbow-input-value"></div>
+                <div class="joint-row"><label for="joint-wrist">Wrist angle</label><output id="wrist-input-value" for="joint-wrist">0°</output><input id="joint-wrist" data-joint-control type="range" min="-90" max="90" step="1" value="0" aria-describedby="wrist-input-value"></div>
+              </div>
+              <div class="robot-control-utilities">
+                <div class="sequence-wrap robot-control-secondary"><button type="button" id="animate-button" class="sequence-button">Run motion sequence ↗</button><button type="button" id="stop-button" class="sequence-stop" hidden>Stop sequence</button></div>
+                <div class="tuner-bottom robot-control-reset"><p>Angles are illustrative, not mechanical joint limits.</p><button class="tuner-reset" type="button" id="reset-robot">Reset to home</button></div>
+              </div>
+              <div class="console-bottom robot-control-footer"><span aria-live="polite" id="pose-status" role="status">✳ In home position</span><div class="telemetry"><span>SHOULDER <b id="shoulder-readout">-48°</b></span><span>ELBOW <b id="elbow-readout">96°</b></span></div></div>
+            </section>
+            <section class="robot-mode-controls robot-3d-controls" id="robot-3d-controls" aria-label="3D chamber controls">
+              <div class="robot-control-heading">
+                <div><p class="robot-control-kicker">3D CHAMBER STUDY</p><h3>Choose a pose</h3></div>
+                <span class="robot-control-count">6 adjustments · 3D view</span>
+              </div>
+              <div class="robot-3d-tools robot-control-presets" role="group" aria-label="3D robot pose presets">
                 <button type="button" data-3d-pose="home" aria-pressed="true">Home</button>
                 <button type="button" data-3d-pose="floor" aria-pressed="false">Approach floor</button>
                 <button type="button" data-3d-pose="inspect" aria-pressed="false">Inspect</button>
                 <button type="button" data-3d-pose="park" aria-pressed="false">Park</button>
               </div>
-              <div class="robot-3d-tools" role="group" aria-label="Camera controls">
-                <button id="r3d-view-left" type="button">Rotate left</button>
-                <button id="r3d-view-right" type="button">Rotate right</button>
-                <button id="r3d-view-reset" type="button">Reset view</button>
+              <div class="robot-control-heading robot-control-heading--joints">
+                <div><p class="robot-control-kicker">MANUAL POSITIONING</p><h4>Adjust joint angles</h4></div>
+                <span class="robot-control-count">Chamber model ranges</span>
               </div>
-              <div class="robot-3d-sliders" aria-label="3D joint controls">
+              <div class="robot-control-sliders robot-3d-sliders" role="group" aria-label="3D manual joint angles">
                 <div class="robot-3d-control"><label for="r3d-yaw">Base rotation</label><output id="r3d-yaw-value">45°</output><input id="r3d-yaw" type="range" min="-180" max="180" step="1" value="45"></div>
                 <div class="robot-3d-control"><label for="r3d-shoulder">Shoulder</label><output id="r3d-shoulder-value">0°</output><input id="r3d-shoulder" type="range" min="-10" max="100" step="1" value="0"></div>
                 <div class="robot-3d-control"><label for="r3d-elbow">Elbow</label><output id="r3d-elbow-value">85°</output><input id="r3d-elbow" type="range" min="0" max="120" step="1" value="85"></div>
@@ -774,11 +797,19 @@
                 <div class="robot-3d-control"><label for="r3d-twist">Tool rotation</label><output id="r3d-twist-value">0°</output><input id="r3d-twist" type="range" min="-180" max="180" step="1" value="0"></div>
                 <div class="robot-3d-control"><label for="r3d-grip">Gripper opening</label><output id="r3d-grip-value">35%</output><input id="r3d-grip" type="range" min="0" max="100" step="1" value="35"></div>
               </div>
-              <p id="robot-3d-status" class="robot-3d-status" role="status" aria-live="polite">Loading chamber view</p>
+              <div class="robot-control-utilities">
+                <div class="robot-control-camera-group"><span class="robot-control-utility-label">CAMERA VIEW</span><div class="robot-3d-tools robot-control-camera" role="group" aria-label="Camera controls">
+                <button id="r3d-view-left" type="button">Rotate left</button>
+                <button id="r3d-view-right" type="button">Rotate right</button>
+                <button id="r3d-view-reset" type="button">Reset view</button>
+              </div></div>
+              </div>
+              <div class="robot-control-footer">
+                <p id="robot-3d-status" class="robot-3d-status" role="status" aria-live="polite">Loading chamber view</p>
+              </div>
               <p class="robot-3d-help">Drag or use the arrow keys to orbit. Uses a 3 in base offset, two 18.5 in links and an 8.5 in tool. Boundary feedback checks arm centerline positions only. This is not self-collision detection, dynamics, validated inverse kinematics, or a real hardware controller.</p>
-            </div>
-          </details>
-          <div class="console-bottom"><span aria-live="polite" id="pose-status" role="status">✳ In home position</span><div class="telemetry"><span>SHOULDER <b id="shoulder-readout">-48°</b></span><span>ELBOW <b id="elbow-readout">96°</b></span></div></div>
+            </section>
+          </div>
         </div>
       </div>
     </section>
