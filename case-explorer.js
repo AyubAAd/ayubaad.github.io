@@ -1,5 +1,5 @@
 /* Interactive, source-grounded overview of the three public engineering case studies.
- * Progressive enhancement: the complete long-form dossiers remain visible below.
+ * The dedicated project pages contain the full engineering analyses.
  * No measurements are synthesized or fetched at runtime.
  */
 (() => {
@@ -40,7 +40,7 @@
         }
       ],
       metrics: [['34','requirements in scope'],['6','planned scenarios'],['10⁻⁷ torr','vacuum target']],
-      anchor: '#case-nasa', href: 'projects/nasa.html'
+      anchor: 'projects/nasa.html#project-evidence', href: 'projects/nasa.html'
     },
     iverify: {
       label: 'IVerify capstone prototype',
@@ -74,7 +74,7 @@
         }
       ],
       metrics: [['≈5.0 N','reported bench preload'],['≈±10%','reported deviation'],['2 LEDs','demonstrated indication']],
-      anchor: '#case-iverify', href: 'projects/iverify.html'
+      anchor: 'projects/iverify.html#project-evidence', href: 'projects/iverify.html'
     },
     controls: {
       label: 'Strain-gauge measurement lab',
@@ -108,7 +108,7 @@
         }
       ],
       metrics: [['49.256 Hz','selected trace frequency'],['610 mV','selected peak output'],['6.335 ms','reported decay constant']],
-      anchor: '#case-controls', href: 'projects/controls.html'
+      anchor: 'projects/controls.html#project-evidence', href: 'projects/controls.html'
     }
   };
 
@@ -206,12 +206,16 @@
   prev.addEventListener('click', () => showStep(step - 1));
   next.addEventListener('click', () => showStep(step + 1));
 
-  // Honor direct links to existing case-study IDs: select the matching explorer tab,
-  // but never hide or move the linked long-form dossier below.
-  const linkedCase = {
+  // Keep older case-study deep links working by selecting the matching explorer tab.
+  const linkedCases = {
     '#case-nasa':'nasa', '#case-iverify':'iverify', '#case-controls':'controls'
-  }[window.location.hash];
+  };
+  const linkedCase = linkedCases[window.location.hash];
   if (linkedCase) selected = linkedCase;
   renderCase();
   explorer.hidden = false;
+  window.addEventListener('hashchange', () => {
+    const target = linkedCases[window.location.hash];
+    if (target) showCase(target);
+  });
 })();
