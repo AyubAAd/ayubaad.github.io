@@ -290,6 +290,13 @@ if(repoOrbitEnabled){
   }
 }
 filterRepos();
+// Let the browser paint the initial non-overlapping layout before enabling motion.
+// This prevents all five planets flying out of the middle when the page loads.
+if(repoOrbitEnabled && typeof requestAnimationFrame === 'function'){
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    repoOrbitShell.classList.add('is-orbit-animated');
+  }));
+}
 
 // Navigation keyboard behavior and active section indicators.
 function closeNav(){
