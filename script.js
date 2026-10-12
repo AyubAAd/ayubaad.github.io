@@ -125,7 +125,7 @@ function paintRepoOrbit(){
   if(!count)return;
   const width = repoOrbitStage.clientWidth || 980;
   const mobile = width <= 550;
-  const radiusX = Math.min(335, width * (mobile ? 0.325 : 0.345));
+  const radiusX = Math.min(335, width * (mobile ? 0.315 : 0.345));
   available.forEach((card, index) => {
     const angle = orbitCycle * index / count - orbitPhase;
     const sine = Math.sin(angle);
